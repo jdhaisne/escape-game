@@ -1,20 +1,9 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.scss";
-import { EHeader } from "./components/EHeader";
-import { EFooter } from "./components/EFooter";
+import { RouterProvider } from "react-router-dom";
+import { ERouter } from "./routes/ERouter";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <EHeader></EHeader>
-
-      <EFooter></EFooter>
-    </>
-  );
+  return <RouterProvider router={ERouter} fallbackElement={<p>Loading...</p>} />;
 }
 
 export default App;
