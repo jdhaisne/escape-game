@@ -1,4 +1,4 @@
-import { ELogin } from "../components/ELogin-component"
+import { ELogin } from "../components/login/ELogin-component"
 
 export const ELoginPage = () => 
 {

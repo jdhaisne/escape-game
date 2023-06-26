@@ -1,5 +1,9 @@
 import { useState } from "react"
 
+
+import style from './style.module.scss'
+import { InputComponent } from "../input/EInput-component"
+
 export const ELogin : React.FunctionComponent = () => 
 {
     const [name, setName] = useState<string>("")
@@ -22,9 +26,9 @@ export const ELogin : React.FunctionComponent = () =>
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <input onChange={handleChangeName} type="text"  placeholder="name" value={name}/>
-                <input onChange={handleChangePassword} type="text" placeholder="password" value={password}/>
+            <form onSubmit={handleSubmit} className={`${style.container} g-container`}>
+                <InputComponent handleChange={handleChangeName} type="text" placeholder="name" value={name} />
+                <InputComponent handleChange={handleChangePassword} type="text" placeholder="password" value={password} />
                 <button type="submit">Login</button>
             </form>
         </>
