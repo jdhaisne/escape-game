@@ -1,19 +1,24 @@
 import { useEffect } from "react"
-import { getUsers } from "../services/ESUsers"
+import { getUsers } from "../services/ESUser-api"
+import { logger } from "../services/ESLogger";
 
 
 
 export const EHomePage : React.FunctionComponent = () =>
 {
-
-useEffect(() => 
-{
-  getUsers().then((v) => 
+  useEffect(() => 
   {
-    console.log(v.name);
-    console.log(v.password);
-  })
-}, [])
+    getUsers()
+      .then(users => {
+        logger.info(users)
+        logger.debug(users)
+        logger.warning(users)
+        logger.error(users)
+      })
+      .catch(error => {
+        console.error('Error retrieving users:', error);
+      });
+  }, [])
 
 return (
     <>
