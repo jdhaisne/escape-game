@@ -1,6 +1,7 @@
 import { EButtonProps } from "../interfaces/interface_App";
 
 export const EButton = ({ children, onClick, classArray }: EButtonProps) => {
+
   const classStr = classArray ? classArray.join(" ") : "";
   return (
     <>
@@ -10,3 +11,4 @@ export const EButton = ({ children, onClick, classArray }: EButtonProps) => {
     </>
   );
 };
+
