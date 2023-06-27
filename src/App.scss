@@ -23,6 +23,14 @@ html, body {
   &__logo {
     background-color: red;
   }
+  &__modal {
+    position: absolute;
+right: 5px;
+top: 35px;
+padding: 5px;
+background: gray;
+width: 300px;
+  }
 }
 
 .footer {
@@ -33,4 +41,10 @@ html, body {
   height: 30px;
   width: 100%;
   align-self: flex-end;
+}
+
+.modal {
+  border: 2px solid black;
+  border-radius: 4px;
+  
 }
