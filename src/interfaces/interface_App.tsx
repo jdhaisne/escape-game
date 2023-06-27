@@ -3,3 +3,10 @@ export interface EButtonProps {
   onClick?: () => void;
   classArray?: string[];
 }
+
+export enum ETextFieldStatus {
+  ALERT,
+  SUCCES,
+  WARNING,
+  ERROR,
+}
