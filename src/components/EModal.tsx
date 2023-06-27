@@ -1,22 +1,23 @@
-import { useState } from "react";
-
 export const EModal = ({
   children,
   isShowing,
   setIsShowing,
+  classArray,
 }: {
   children: React.ReactNode;
   isShowing: boolean;
   setIsShowing: React.Dispatch<React.SetStateAction<boolean>>;
+  classArray?: string[];
 }) => {
-  console.log(isShowing);
+  const classStr = classArray ? classArray.join(" ") : "";
   const onClick = () => {
     setIsShowing(false);
   };
+
   return (
     <>
       {isShowing ? (
-        <div className="modal">
+        <div className={classStr + " modal"}>
           <div onClick={onClick}>x</div>
           {children}
           {isShowing}
