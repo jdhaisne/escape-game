@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { EModal } from "./EModal";
+import { EButton } from "./EButton";
 
 export const EHeader = () => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
@@ -15,7 +16,12 @@ export const EHeader = () => {
         </div>
       </div>
       <EModal isShowing={isShowing} setIsShowing={setIsShowing}>
-        <button>bg</button>
+        <EButton
+          onClick={() => alert("click")}
+          classArray={["modal__button--close"]}
+        >
+          bg
+        </EButton>
       </EModal>
     </>
   );
