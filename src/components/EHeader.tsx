@@ -12,7 +12,7 @@ export const EHeader = () => {
   const onSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .post("localhost:3000/user", {
+      .post("http://localhost:3000/users", {
         mail: e.target.mail.value,
         password: e.target.password.value,
       })
