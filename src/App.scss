@@ -8,7 +8,9 @@
   justify-content: space-between;
 
 }
-html, body {
+
+html,
+body {
   height: 100%;
   width: 100%;
 }
@@ -17,34 +19,79 @@ html, body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 30px;
+  height: 70px;
   justify-content: space-between;
-  background-color: green;
+  align-items: center;
+  background-color: #876BAB;
+
   &__logo {
     background-color: red;
   }
+
   &__modal {
     position: absolute;
-right: 5px;
-top: 35px;
-padding: 5px;
-background: gray;
-width: 300px;
+    right: 5px;
+    top: 35px;
+    padding: 5px;
+    background: gray;
+    width: 300px;
   }
+}
+
+.header__button {
+  margin: 10px;
+  background-color: #FFF;
+  text-transform: uppercase;
+}
+
+.footer-social-media {
+  display: flex;
+  margin: 0px 5px;
+}
+
+.facebook,
+.instagram,
+.twitter {
+  background-size: contain;
+  height: 30px;
+  width: 30px;
+  margin: 0px 5px;
+}
+
+.facebook {
+  background-image: url(./img/facebook.png);
+}
+
+.instagram {
+  background-image: url(./img/instagram.png);
+}
+
+.twitter {
+  background-image: url(./img/twitter.png);
 }
 
 .footer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  background-color: green;
-  height: 30px;
+  background-color: #876BAB;
+  height: 50px;
   width: 100%;
-  align-self: flex-end;
+  align-items: center;
+}
+
+.footer__section {
+  color: #FFF;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 10px 0px
+}
+
+.footer-middle {
+  text-align: center;
 }
 
 .modal {
   border: 2px solid black;
   border-radius: 4px;
-  
+
 }
