@@ -106,14 +106,50 @@ body {
   margin: auto;
   // background: $primary-colors;
   padding: 10px;
+
   &__onglet {
-    background-color:  $primary-colors;
+    background-color: $primary-colors;
     ;
+
     &__wrapper {
       display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: $primary-colors;
+      color: #FFF;
+      text-transform: uppercase;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      width: 40rem;
+      height: 5rem;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
     }
   }
+
   &__form {
     background-color: $primary-colors;
   }
+}
+
+.form-card__onglet--left {
+  width: 20rem;
+  text-align: center;
+  height: 5rem;
+  border-top-left-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-card__onglet--right {
+  width: 20rem;
+  text-align: center;
+  height: 5rem;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #FFF
 }
