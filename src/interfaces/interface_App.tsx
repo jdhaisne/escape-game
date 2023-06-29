@@ -4,9 +4,10 @@ export interface EButtonProps {
   classArray?: string[];
 }
 
-export enum ETextFieldStatus {
+export enum EInputStatus {
+  DEFAULT,
   ALERT,
-  SUCCES,
+  SUCCESS,
   WARNING,
   ERROR,
 }
