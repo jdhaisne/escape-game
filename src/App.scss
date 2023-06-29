@@ -49,6 +49,7 @@ body {
 
 .footer-social-media {
   display: flex;
+  flex-wrap: wrap;
   margin: 0px 5px;
 }
 
@@ -76,10 +77,11 @@ body {
 
 .footer {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   flex-direction: row;
   justify-content: space-around;
   background-color: #876BAB;
-  height: 100px;
   width: 100%;
   align-items: center;
 }
