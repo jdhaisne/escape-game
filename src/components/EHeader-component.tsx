@@ -3,6 +3,7 @@ import { EModal } from "./EModal";
 import { EButton } from "./EButton";
 import { ELoginForm } from "./ELoginForm";
 import { ESubscribeForm } from "./ESubscribeForm";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 
 export const EHeader = () => {
@@ -32,12 +33,18 @@ export const EHeader = () => {
     <>
       <div className="header">
         <div className="header__logo">logo</div>
-        <EButton classArray={["header__button"]} onClick={onClick}>
+        <NavLink
+          to="/login"
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "active" : ""
+          }
+        >
           login/logout
-        </EButton>
+        </NavLink>
+        ;<EButton classArray={["header__button"]} onClick={onClick}></EButton>
       </div>
 
-      <EModal
+      {/* <EModal
         isShowing={isShowing}
         setIsShowing={setIsShowing}
         classArray={["header__modal"]}
@@ -63,7 +70,7 @@ export const EHeader = () => {
             </p>
           </>
         )}
-      </EModal>
+      </EModal> */}
     </>
   );
 };

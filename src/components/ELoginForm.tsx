@@ -13,7 +13,7 @@ type formData = {
   password: string;
 };
 
-export const ELoginForm = () => {
+export const ELoginForm = ({ className }: { className: string }) => {
   const methods = useForm<formData>();
 
   const onSubmit = methods.handleSubmit(async (data) => {
@@ -28,7 +28,7 @@ export const ELoginForm = () => {
           e.preventDefault();
         }}
         noValidate
-        className="container"
+        className={"container " + className}
       >
         <EInput
           label="mail"
