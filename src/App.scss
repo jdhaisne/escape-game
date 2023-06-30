@@ -138,8 +138,23 @@ body {
 
     &--left {
       width: 20rem;
-=======
+        text-align: center;
+        height: 5rem;
+        border-top-left-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
   }
+  &--right {
+    width: 20rem;
+  text-align: center;
+  height: 5rem;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #FFF
+  }}
 
   &__form {
     background-color: #a46bab;
@@ -160,21 +175,6 @@ input {
 }
 
 .form-card__onglet {
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.form-card__onglet--left {
-  background-color: #5F4C78;
-  width: 20rem;
-  text-align: center;
-  height: 5rem;
-  border-top-left-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-    }
   &--right {
     width: 20rem;
   text-align: center;
@@ -186,10 +186,11 @@ input {
 
   border: 1px solid #FFF
   }
-  }
-
   &__form {
     background-color: $primary-colors;
+  }
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -257,10 +258,8 @@ input {
       color: $primary-colors;
     }
     }
-=======
-  border: 1px solid #FFF;
-  background-color: #a46bab;
-}
+
+
 
 .login__button {
   text-transform: uppercase;
