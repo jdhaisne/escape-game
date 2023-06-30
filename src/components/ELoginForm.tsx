@@ -13,7 +13,7 @@ type formData = {
   password: string;
 };
 
-export const ELoginForm = ({ className }: { className: string }) => {
+export const ELoginForm = ({ className }: { className?: string }) => {
   const methods = useForm<formData>();
 
   const onSubmit = methods.handleSubmit(async (data) => {

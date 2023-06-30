@@ -82,12 +82,8 @@ body {
   justify-content: center;
   flex-direction: row;
   justify-content: space-around;
-<<<<<<< HEAD
-  background-color: #876BAB;
-=======
   background-color: $primary-colors;
   height: 100px;
->>>>>>> dev-css-login
   width: 100%;
   align-items: center;
 }
@@ -124,7 +120,7 @@ body {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      background-color: $primary-colors;
+      background-color: #876BAB;
       color: #FFF;
       text-transform: uppercase;
       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -139,7 +135,7 @@ body {
 
   &__form {
     background-color: #a46bab;
-    height: 15rem;
+    height: 25rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -149,18 +145,20 @@ body {
   }
 }
 
-<<<<<<< HEAD
-.form-card__onglet--left {
-=======
 input {
   width: 30rem;
   height: 2rem;
   margin-bottom: 5px;
 }
 
+.form-card__onglet {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .form-card__onglet--left {
-  background-color: #a46bab;
->>>>>>> dev-css-login
+  background-color: #5F4C78;
   width: 20rem;
   text-align: center;
   height: 5rem;
@@ -174,15 +172,12 @@ input {
   width: 20rem;
   text-align: center;
   height: 5rem;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
-  border: 1px solid #FFF
-=======
   border: 1px solid #FFF;
-  background-color: $secondary-colors;
+  background-color: #a46bab;
 }
 
 .login__button {
@@ -193,9 +188,24 @@ input {
   font-size: 20px;
   font-weight: 600;
   height: 3rem;
-  width: 20rem;
+  width: 30rem;
   text-align: center;
   border: 1px solid $secondary-colors;
   margin-top: 10px;
->>>>>>> dev-css-login
+}
+
+// used to reset the tab target :
+.target {
+  background-color: #bebac4;
+}
+
+
+// when login tab is selected :
+.target-login {
+  background-color: #a46bab;
+}
+
+// when register tab is selected : 
+.target-register {
+  background-color: #a46bab;
 }
