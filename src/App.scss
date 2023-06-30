@@ -1,6 +1,7 @@
 @import url('./assets/styles/reset.scss');
 
 $primary-colors: #876BAB;
+$secondary-colors: #5F4C78;
 
 #root {
   height: 100%;
@@ -47,6 +48,7 @@ body {
   text-transform: uppercase;
 }
 
+//FOOTER
 .footer-social-media {
   display: flex;
   margin: 0px 5px;
@@ -73,12 +75,11 @@ body {
   background-image: url(./img/twitter.png);
 }
 
-
 .footer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  background-color: #876BAB;
+  background-color: $primary-colors;
   height: 100px;
   width: 100%;
   align-items: center;
@@ -100,6 +101,7 @@ body {
   border-radius: 4px;
 }
 
+//FORMS
 .form-card {
   display: flex;
   flex-direction: column;
@@ -129,7 +131,7 @@ body {
   }
 
   &__form {
-    background-color: $primary-colors;
+    background-color: #a46bab;
     height: 15rem;
     display: flex;
     flex-direction: column;
@@ -147,6 +149,7 @@ input {
 }
 
 .form-card__onglet--left {
+  background-color: #a46bab;
   width: 20rem;
   text-align: center;
   height: 5rem;
@@ -165,5 +168,19 @@ input {
   justify-content: center;
   align-items: center;
   border: 1px solid #FFF;
-  background-color: #5F4C78;
+  background-color: $secondary-colors;
+}
+
+.login__button {
+  text-transform: uppercase;
+  color: #FFF;
+  background-color: $secondary-colors;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  height: 3rem;
+  width: 20rem;
+  text-align: center;
+  border: 1px solid $secondary-colors;
+  margin-top: 10px;
 }

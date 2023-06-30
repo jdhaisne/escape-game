@@ -44,7 +44,7 @@ export const ELoginForm = ({ className }: { className: string }) => {
           placeholder="type your password..."
           {...password_validation_login}
         />
-        <EButton onClick={onSubmit}>login</EButton>
+        <EButton classArray={["login__button"]} onClick={onSubmit}>login</EButton>
       </form>
     </FormProvider>
   );
