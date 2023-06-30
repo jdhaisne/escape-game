@@ -2,6 +2,10 @@
 
 $primary-colors: #876BAB;
 
+*{
+  font-size: 3rem;
+}
+
 #root {
   height: 100%;
   width: 100%;
@@ -128,25 +132,17 @@ body {
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
     }
-  }
-
-  &__form {
-    background-color: $primary-colors;
-  }
-}
-
-.form-card__onglet--left {
-  width: 20rem;
+    &--left {
+      width: 20rem;
   text-align: center;
   height: 5rem;
   border-top-left-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.form-card__onglet--right {
-  width: 20rem;
+    }
+  &--right {
+    width: 20rem;
   text-align: center;
   height: 5rem;
   border-top-right-radius: 10px;
@@ -154,4 +150,75 @@ body {
   justify-content: center;
   align-items: center;
   border: 1px solid #FFF
+  }
+  }
+
+  &__form {
+    background-color: $primary-colors;
+  }
 }
+
+// .form-card__onglet--left {
+//   width: 20rem;
+//   text-align: center;
+//   height: 5rem;
+//   border-top-left-radius: 10px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .form-card__onglet--right {
+//   width: 20rem;
+//   text-align: center;
+//   height: 5rem;
+//   border-top-right-radius: 10px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   border: 1px solid #FFF
+// }
+
+.showroom {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  }
+
+
+  .homepage {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  gap: 20px;
+  padding: 10px;
+  &__title {
+    font-size: 4rem;
+  }
+  }
+
+  .room {
+    padding: 15px;
+    border: 2px solid;
+
+    border-radius: 10px;
+    &__title {
+    font-size: 3rem;
+    &__wrapper {
+
+    }
+    }
+    &__footer {
+    display: flex;
+    gap: 10px;
+    font-size: 2rem;
+    }
+    &__desc {
+    font-size: 2rem;
+    }
+    &__link {
+      color: $primary-colors;
+    }
+    }

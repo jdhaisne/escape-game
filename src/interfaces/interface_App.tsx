@@ -11,3 +11,13 @@ export enum EInputStatus {
   WARNING,
   ERROR,
 }
+
+export interface ERoom {
+  _id: string;
+  image: string;
+  name: string;
+  description: string;
+  age_limit: string;
+}
+
+export type ERooms = ERoom[];
