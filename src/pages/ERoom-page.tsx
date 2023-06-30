@@ -9,13 +9,8 @@ export const ERoomPage = () =>
 
     console.log(id);
 
-    
-    
-
     return <div>
         <ERoomTitle/>
-
-
         {/*  NEED TO ADD A FLEX AND STYLIZE HERE THE LEFT AND RIGHT CARD OF ROOMS
             LEFT : IMAGE 
             RIGHT : BOOKING FOR ROOMS
