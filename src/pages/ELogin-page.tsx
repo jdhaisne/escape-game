@@ -6,8 +6,8 @@ import { ELogin } from "../components/login/ELogin-component";
 import style from "../components/login/style.module.scss";
 
 export const ELoginPage = () => {
-  const [stateLog, setStateLog] = useState<string>("")
-  const [styleTargetLogin, setStyleTargetLogin] = useState<string>("")
+  const [stateLog, setStateLog] = useState<string>("login")
+  const [styleTargetLogin, setStyleTargetLogin] = useState<string>("login")
 
   const [styleTargetRegister, setStyleTargetRegister] = useState<string>("")
 
