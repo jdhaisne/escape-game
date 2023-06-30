@@ -8,7 +8,7 @@ interface Booking {
 
 
 
-export const ERoomBooking: React.FC = () => {
+export const ERoomBooking: React.FunctionComponent = () => {
   const [counterSlot, setCounterSlot] = useState<number>(0);
   const [bookingData, setBookingData] = useState<Booking[]>([]);
 
@@ -34,13 +34,6 @@ export const ERoomBooking: React.FC = () => {
     setBookingData(updatedBookingData);
   };
 
-  const handleFormBookingDelete = (index: number) => {
-    const updatedBookingData = [...bookingData];
-    updatedBookingData.splice(index, 1);
-    setBookingData(updatedBookingData);
-    handleRemove(); // Réduire le compteur de slot
-  };
-
   const renderFormBookings = () => {
     const formBookings = [];
     for (let i = 0; i < counterSlot; i++) {
@@ -48,7 +41,6 @@ export const ERoomBooking: React.FC = () => {
         <EFormBooking
           key={i}
           onChange={(value : any) => handleFormBookingChange(i, value)}
-          onDelete={() => handleFormBookingDelete(i)}
         />
       );
     }
