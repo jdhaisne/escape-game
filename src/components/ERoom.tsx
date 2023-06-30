@@ -25,12 +25,7 @@ export const ERoom = ({
       </div>
       <div className="room__desc">{desc}</div>
       <div className="room__footer">
-        <span
-          className="room__link
-"
-        >
-          detail
-        </span>
+        <span className="room__link">detail</span>
         <span className="room__link">reserver</span>
         <img className="room_pegi" />
       </div>
