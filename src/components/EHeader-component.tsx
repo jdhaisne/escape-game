@@ -32,7 +32,9 @@ export const EHeader = () => {
   return (
     <>
       <div className="header">
-        <div className="header__logo"></div>
+        <NavLink to="/">
+          <div className="header__logo"></div>
+        </NavLink>
         <NavLink
           to="/login"
           className={"header__button " + ((isPending: boolean, isActive: boolean) => isPending ? "pending" : isActive ? "active" : "")}
