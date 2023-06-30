@@ -10,7 +10,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 // type formData = {};
 
-export const ESubscribeForm = ({}: {}) => {
+export const ESubscribeForm = ({ className }: { className?: string }) => {
   const methods = useForm();
 
   const onSubmit = methods.handleSubmit(async (data) => {
@@ -28,7 +28,7 @@ export const ESubscribeForm = ({}: {}) => {
       <form
         onSubmit={(e) => e.preventDefault()}
         noValidate
-        className="container"
+        className={"container " + className}
       >
         <EInput
           label="first"
@@ -96,7 +96,7 @@ export const ESubscribeForm = ({}: {}) => {
             },
           }}
         />
-        <EButton onClick={onSubmit}>Subscribe</EButton>
+        <EButton classArray={["login__button"]} onClick={onSubmit}>Subscribe</EButton>
       </form>
     </FormProvider>
   );
