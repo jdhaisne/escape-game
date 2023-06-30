@@ -1,6 +1,6 @@
 import { useEffect } from "react"
-import { getUsers } from "../services/ESUser-api"
 import { logger } from "../services/ESLogger";
+import { getRooms } from "../services/ESRooms";
 
 
 
@@ -8,15 +8,12 @@ export const EHomePage : React.FunctionComponent = () =>
 {
   useEffect(() => 
   {
-    getUsers()
-      .then(users => {
-        logger.info(users)
-        logger.debug(users)
-        logger.warning(users)
-        logger.error(users)
+    getRooms()
+      .then(room => {
+        logger.debug(room)
       })
       .catch(error => {
-        console.error('Error retrieving users:', error);
+        console.error('Error retrieving rooms:', error);
       });
   }, [])
 
