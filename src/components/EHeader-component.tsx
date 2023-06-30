@@ -32,16 +32,13 @@ export const EHeader = () => {
   return (
     <>
       <div className="header">
-        <div className="header__logo">logo</div>
+        <div className="header__logo"></div>
         <NavLink
           to="/login"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
-        >
-          login/logout
+          className={"header__button " + ((isPending: boolean, isActive: boolean) => isPending ? "pending" : isActive ? "active" : "")}
+        >Log In
         </NavLink>
-        ;<EButton classArray={["header__button"]} onClick={onClick}></EButton>
+        {/* <EButton classArray={[]} onClick={onClick}></EButton> */}
       </div>
 
       {/* <EModal

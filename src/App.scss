@@ -30,7 +30,10 @@ body {
   background-color: #876BAB;
 
   &__logo {
-    background-color: red;
+    width: 15em;
+    height: 9rem;
+    background-image: url(../public/img/escapelogo.png);
+    background-size: cover;
   }
 
   &__modal {
@@ -43,11 +46,29 @@ body {
   }
 }
 
-
 .header__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 10px;
-  background-color: #FFF;
+  text-align: center;
+  text-decoration: none;
   text-transform: uppercase;
+  background-color: #FF5E02;
+  width: 15rem;
+  height: 2rem;
+  border: 1px solid #FF5E02;
+  border-radius: 20px;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.header__button:hover {
+  color: #FF5E02;
+  background-color: #FFF;
+  border: 1px solid #FFF;
 }
 
 //FOOTER
