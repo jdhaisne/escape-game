@@ -13,7 +13,7 @@ type formData = {
   password: string;
 };
 
-export const ELoginForm = ({ className }: { className: string }) => {
+export const ELoginForm = ({ className }: { className?: string }) => {
   const methods = useForm<formData>();
 
   const onSubmit = methods.handleSubmit(async (data) => {
@@ -44,7 +44,7 @@ export const ELoginForm = ({ className }: { className: string }) => {
           placeholder="type your password..."
           {...password_validation_login}
         />
-        <EButton onClick={onSubmit}>login</EButton>
+        <EButton classArray={["login__button"]} onClick={onSubmit}>login</EButton>
       </form>
     </FormProvider>
   );
