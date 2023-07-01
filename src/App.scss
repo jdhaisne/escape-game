@@ -157,23 +157,25 @@ body {
 
     &--left {
       width: 20rem;
-        text-align: center;
-        height: 5rem;
-        border-top-left-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      text-align: center;
+      height: 5rem;
+      border-top-left-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &--right {
+      width: 20rem;
+      text-align: center;
+      height: 5rem;
+      border-top-right-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #FFF
+    }
   }
-  &--right {
-    width: 20rem;
-  text-align: center;
-  height: 5rem;
-  border-top-right-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #FFF
-  }}
 
   &__form {
     background-color: #a46bab;
@@ -196,18 +198,20 @@ input {
 .form-card__onglet {
   &--right {
     width: 20rem;
-  text-align: center;
-  height: 5rem;
-  border-top-left-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    text-align: center;
+    height: 5rem;
+    border-top-left-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  border: 1px solid #FFF
+    border: 1px solid #FFF
   }
+
   &__form {
     background-color: $primary-colors;
   }
+
   &:hover {
     cursor: pointer;
   }
@@ -238,10 +242,10 @@ input {
   display: flex;
   justify-content: center;
   gap: 15px;
-  }
+}
 
 
-  .homepage {
+.homepage {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -249,34 +253,38 @@ input {
   height: 100%;
   gap: 20px;
   padding: 10px;
+
   &__title {
     font-size: 4rem;
   }
+}
+
+.room {
+  padding: 15px;
+  border: 2px solid;
+
+  border-radius: 10px;
+
+  &__title {
+    font-size: 3rem;
+
+    &__wrapper {}
   }
 
-  .room {
-    padding: 15px;
-    border: 2px solid;
-
-    border-radius: 10px;
-    &__title {
-    font-size: 3rem;
-    &__wrapper {
-
-    }
-    }
-    &__footer {
+  &__footer {
     display: flex;
     gap: 10px;
     font-size: 2rem;
-    }
-    &__desc {
+  }
+
+  &__desc {
     font-size: 2rem;
-    }
-    &__link {
-      color: $primary-colors;
-    }
-    }
+  }
+
+  &__link {
+    color: $primary-colors;
+  }
+}
 
 
 
@@ -294,6 +302,12 @@ input {
   margin-top: 10px;
 }
 
+.login__button:hover {
+  color: $secondary-colors;
+  border: 1px solid #FFF;
+  background-color: #FFF;
+}
+
 // used to reset the tab target :
 .target {
   background-color: #bebac4;
@@ -308,4 +322,8 @@ input {
 // when register tab is selected : 
 .target-register {
   background-color: #a46bab;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dev
