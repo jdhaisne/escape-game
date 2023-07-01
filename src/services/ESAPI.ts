@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { logger } from './ESLogger';
-import { URL_API } from './config';
+
+
+const URL_API = `http://localhost:3000`;
 
 
 export const API = {
