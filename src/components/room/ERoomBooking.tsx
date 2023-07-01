@@ -1,62 +1,82 @@
 import React, { useState } from "react";
+import { logger } from "../../services/ESLogger";
+import { useForm, FormProvider } from "react-hook-form";
 import { EFormBooking } from "../EFormBooking";
-
-interface Booking {
-  firstName: string;
-  // Ajoutez d'autres champs de réservation si nécessaire
-}
-
+import { IBooking } from "../../interfaces/IBooking";
 
 
 export const ERoomBooking: React.FunctionComponent = () => {
-  const [counterSlot, setCounterSlot] = useState<number>(0);
-  const [bookingData, setBookingData] = useState<Booking[]>([]);
+  const [bookingData, setBookingData] = useState<IBooking[]>([{ firstName: "", lastName: "", birthday: "" }]);
+  const methods = useForm(); // Initialize the useForm hook
 
-  const handleAdd = () => {
-    if (counterSlot <= 10) {
-      setCounterSlot((prevSlot) => prevSlot + 1);
-    }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = bookingData; // Retrieve the form data from the bookingData state
+    logger.debug(formData);
   };
 
-  const handleRemove = () => {
-    if (counterSlot > 0) {
-      setCounterSlot((prevSlot) => prevSlot - 1);
-    }
-  };
-
-  const handleSubmit = () => {
-    // Envoyer les données de réservation
-  };
-
-  const handleFormBookingChange = (index: number, value: string) => {
-    const updatedBookingData = [...bookingData];
-    updatedBookingData[index] = { firstName: value };
+  const handleFormBookingChange = (index: number, field: string, value: string) => {
+    const updatedBookingData = bookingData.map((booking, i) => {
+      if (i === index) {
+        return { ...booking, [field]: value };
+      }
+      return booking;
+    });
     setBookingData(updatedBookingData);
   };
 
   const renderFormBookings = () => {
-    const formBookings = [];
-    for (let i = 0; i < counterSlot; i++) {
-      formBookings.push(
-        <EFormBooking
-          key={i}
-          onChange={(value : any) => handleFormBookingChange(i, value)}
-        />
-      );
+    return bookingData.map((booking, index) => (
+      <EFormBooking
+        key={index}
+        bookingData={bookingData}
+        index={index}
+        onChange={handleFormBookingChange}
+      />
+    ));
+  };
+
+  const handleCounterSlotChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = parseInt(event.target.value);
+    let newBookingData = [...bookingData];
+  
+    if (value > bookingData.length) {
+      const diff = value - bookingData.length;
+      for (let i = 0; i < diff; i++) {
+        newBookingData = [
+          ...newBookingData,
+          { firstName: "", lastName: "", birthday: "" }
+        ];
+      }
+    } else if (value < bookingData.length) {
+      newBookingData = newBookingData.slice(0, value);
     }
-    return formBookings;
+  
+    setBookingData(newBookingData);
+  };
+
+  const renderCounterSlotOptions = () => {
+    const options = [];
+    for (let i = 1; i <= 10; i++) {
+      options.push(<option key={i} value={i}>{i}</option>);
+    }
+    return options;
   };
 
   return (
-    <div onSubmit={handleSubmit}>
-      <h3>VOYEZ CE JEU EXQUIS</h3>
-      {/* Reste du contenu... */}
-      <div>{renderFormBookings()}</div>
-      <button onClick={handleAdd}>+</button>
-      <button onClick={handleRemove}>-</button>
-      <button type="submit">Valider votre réservation</button>
-    </div>
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit}>
+        <h3>VOYEZ CE JEU EXQUIS</h3>
+        <div>
+          <label htmlFor="counterSlot">Nombre de participants :</label>
+          <select id="counterSlot" value={bookingData.length} onChange={handleCounterSlotChange}>
+            {renderCounterSlotOptions()}
+          </select>
+        </div>
+
+        <div>{renderFormBookings()}</div>
+        <button type="submit">Valider votre réservation</button>
+      </form>
+    </FormProvider>
   );
 };
-
-export default ERoomBooking;

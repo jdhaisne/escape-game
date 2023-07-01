@@ -1,66 +1,115 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { EInput } from "./EInput";
-import { name_validation } from "../utils/formValidation";
-import { FormProvider, useForm } from "react-hook-form";
-import { EButton } from "./EButton";
+import { IBooking } from "../interfaces/IBooking";
+import { name_validation, dateValidation } from "../utils/formValidation";
 
-interface FormBookingProps {
-    onChange: (value: string) => void;
+interface EFormBookingProps {
+  bookingData: IBooking[];
+  index: number;
+  onChange: (index: number, field: string, value: string) => void;
 }
 
-type formData = {
-    firstname: string;
-    lastname: string;
-    birthday: string;
+export const EFormBooking: React.FC<EFormBookingProps> = ({
+  bookingData,
+  index,
+  onChange
+}) => {
+  const [errors, setErrors] = useState<{ [key: string]: string }>({
+    firstName: "",
+    lastName: "",
+    birthday: ""
+  });
+
+  const handleFieldChange = (field: string, value: string) => {
+    let fieldValidation: any; // Use 'any' type assertion here
+  
+    if (field === "firstName" || field === "lastName") {
+      fieldValidation = name_validation as {
+        validation: {
+          required: { value: boolean; message: string };
+          minLength: { value: number; message: string };
+          maxLength: { value: number; message: string };
+        };
+      };
+    } else if (field === "birthday") {
+      fieldValidation = {
+        validation: {
+          required: { value: true, message: "Invalid date format. Please use DD/MM/YYYY" },
+          pattern: {
+            value: /^\d{2}\/\d{2}\/\d{4}$/,
+          },
+        },
+      };
+    }
+  
+    const isValid = Object.keys(fieldValidation.validation).every((rule) => {
+      const ruleValue = fieldValidation.validation[rule];
+      if (rule === "required" && ruleValue) {
+        return !!value.trim();
+      }
+      if (rule === "minLength" && ruleValue) {
+        return value.length >= ruleValue.value;
+      }
+      if (rule === "maxLength" && ruleValue) {
+        return value.length <= ruleValue.value;
+      }
+      if (rule === "pattern" && ruleValue) {
+        return ruleValue.value.test(value);
+      }
+      return true;
+    });
+  
+    if (isValid) {
+      onChange(index, field, value);
+      setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
+    } else {
+      const errorMessage = Object.values(fieldValidation.validation).map(
+        (rule : any) => rule.message
+      )[0]; // Access the first error message
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [field]: errorMessage,
+      }));
+    }
   };
   
-  
-export const EFormBooking: React.FunctionComponent<FormBookingProps> = ({ onChange }) => {
-    const methods = useForm<formData>();
 
-    const [firstName, setFirstName] = useState("");
-
-    const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value : string = event.target.value;
-        setFirstName(value);
-        onChange(value);
-    };
-
-    return (
-        <FormProvider {...methods}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-            noValidate
-            className={"container "}
-          >
-            <EInput
-              label="firstname"
-              type="text"
-              id="firstname"
-              placeholder="Type your firstname..."
-              {...name_validation}
-              name={"firstname"}
-            />
-
-            <EInput
-              label="lastname"
-              type="text"
-              id="lastname"
-              placeholder="Type your lastname..."
-              {...name_validation}
-              name={"lastname"}
-            />
-            <EInput
-              label="date"
-              type="date"
-              id="date"
-              placeholder="type your date..."
-              {...name_validation}
-              name={"date"}
-            />
-          </form>
-        </FormProvider>
-      );
+  return (
+    <div>
+      <h4>Participant {index + 1}</h4>
+      <EInput
+        label="Prénom"
+        id={`firstName${index}`}
+        type="text"
+        placeholder="Prénom"
+        hasLabel={true}
+        validation={name_validation}
+        name={`firstName${index}`}
+        onChange={(e) => handleFieldChange("firstName", e.target.value)}
+        error={errors["firstName"]}
+      />
+      <EInput
+        label="Nom"
+        id={`lastName${index}`}
+        type="text"
+        placeholder="Nom"
+        hasLabel={true}
+        validation={name_validation}
+        name={`lastName${index}`}
+        onChange={(e) => handleFieldChange("lastName", e.target.value)}
+        error={errors["lastName"]}
+      />
+      <EInput
+        label="Date de naissance"
+        id={`birthday${index}`}
+        type="text"
+        placeholder="Date de naissance"
+        hasLabel={true}
+        validation={dateValidation}
+        name={`birthday${index}`}
+        onChange={(e) => handleFieldChange("birthday", e.target.value)}
+        error={errors["birthday"]}
+      />
+    </div>
+  );
 };

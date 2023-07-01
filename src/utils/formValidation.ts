@@ -77,7 +77,7 @@ export const name_validation = {
     validation: {
         required: {
             value: true,
-            message: 'required'
+            message: 'please set a valid name.'
         },
         minLength: {
             value: 2,
@@ -107,3 +107,14 @@ export const name_validation = {
 //         // }
 //     }
 // }
+
+export const dateValidation = {
+    required: {
+      value: true,
+      message: "Ce champ est requis."
+    },
+    pattern: {
+      value: /^(\d{2})\/(\d{2})\/(\d{4})$/,
+      message: "Format de date invalide (JJ/MM/AAAA)"
+    }
+  };
