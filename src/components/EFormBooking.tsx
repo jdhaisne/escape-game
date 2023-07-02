@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import { EInput } from "./EInput";
-import { IBooking } from "../interfaces/IBooking";
-import { name_validation, dateValidation } from "../utils/formValidation";
+import { validateField } from "../services/ESFieldValidation";
+import { fieldValidations } from "../utils/formValidation";
 
-interface EFormBookingProps {
-  bookingData: IBooking[];
-  index: number;
-  onChange: (index: number, field: string, value: string) => void;
-}
-
-export const EFormBooking: React.FC<EFormBookingProps> = ({
-  bookingData,
+export const EFormBooking: React.FC<IEFormBooking> = ({
   index,
   onChange
 }) => {
@@ -21,94 +14,48 @@ export const EFormBooking: React.FC<EFormBookingProps> = ({
   });
 
   const handleFieldChange = (field: string, value: string) => {
-    let fieldValidation: any; // Use 'any' type assertion here
-  
-    if (field === "firstName" || field === "lastName") {
-      fieldValidation = name_validation as {
-        validation: {
-          required: { value: boolean; message: string };
-          minLength: { value: number; message: string };
-          maxLength: { value: number; message: string };
-        };
-      };
-    } else if (field === "birthday") {
-      fieldValidation = {
-        validation: {
-          required: { value: true, message: "Invalid date format. Please use DD/MM/YYYY" },
-          pattern: {
-            value: /^\d{2}\/\d{2}\/\d{4}$/,
-          },
-        },
-      };
-    }
-  
-    const isValid = Object.keys(fieldValidation.validation).every((rule) => {
-      const ruleValue = fieldValidation.validation[rule];
-      if (rule === "required" && ruleValue) {
-        return !!value.trim();
-      }
-      if (rule === "minLength" && ruleValue) {
-        return value.length >= ruleValue.value;
-      }
-      if (rule === "maxLength" && ruleValue) {
-        return value.length <= ruleValue.value;
-      }
-      if (rule === "pattern" && ruleValue) {
-        return ruleValue.value.test(value);
-      }
-      return true;
-    });
-  
-    if (isValid) {
+    const errorMessage = validateField(value, fieldValidations[field]);
+
+    if (!errorMessage) {
       onChange(index, field, value);
       setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
     } else {
-      const errorMessage = Object.values(fieldValidation.validation).map(
-        (rule : any) => rule.message
-      )[0]; // Access the first error message
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [field]: errorMessage,
-      }));
+      setErrors((prevErrors) => ({ ...prevErrors, [field]: errorMessage }));
     }
   };
-  
 
   return (
     <div>
       <h4>Participant {index + 1}</h4>
       <EInput
-        label="Prénom"
-        id={`firstName${index}`}
+        label="First Name"
+        id={`firstName`}
         type="text"
-        placeholder="Prénom"
-        hasLabel={true}
-        validation={name_validation}
-        name={`firstName${index}`}
-        onChange={(e) => handleFieldChange("firstName", e.target.value)}
-        error={errors["firstName"]}
+        placeholder="First Name"
+        hasLabel={false}
+        name={`firstName`}
+        onChange={(e) => handleFieldChange("firstname", e.target.value)}
+        error={errors["firstname"]}
       />
       <EInput
-        label="Nom"
-        id={`lastName${index}`}
+        label="Last Name"
+        id={`lastName`}
         type="text"
-        placeholder="Nom"
-        hasLabel={true}
-        validation={name_validation}
-        name={`lastName${index}`}
-        onChange={(e) => handleFieldChange("lastName", e.target.value)}
-        error={errors["lastName"]}
+        placeholder="Last Name"
+        hasLabel={false}
+        name={`lastName`}
+        onChange={(e) => handleFieldChange("lastname", e.target.value)}
+        error={errors["lastname"]}
       />
       <EInput
-        label="Date de naissance"
-        id={`birthday${index}`}
+        label="Date of Birth"
+        id={`birthday`}
         type="text"
-        placeholder="Date de naissance"
-        hasLabel={true}
-        validation={dateValidation}
-        name={`birthday${index}`}
-        onChange={(e) => handleFieldChange("birthday", e.target.value)}
-        error={errors["birthday"]}
+        placeholder="Date of Birth"
+        hasLabel={false}
+        name={`birthday`}
+        onChange={(e) => handleFieldChange("date", e.target.value)}
+        error={errors["date"]}
       />
     </div>
   );

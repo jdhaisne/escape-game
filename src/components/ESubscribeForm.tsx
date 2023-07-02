@@ -1,102 +1,123 @@
-import { postUSer } from "../services/ESUser-api";
-import {
-  mail_validation,
-  name_validation,
-  password_validation,
-} from "../utils/formValidation";
+import { useState } from "react";
+import { API } from "../services/ESAPI";
+import { validateField } from "../services/ESFieldValidation";
 import { EButton } from "./EButton";
 import { EInput } from "./EInput";
 import { FormProvider, useForm } from "react-hook-form";
-
-// type formData = {};
+import { fieldValidations } from "../utils/formValidation";
+import { logger } from "../services/ESLogger";
 
 export const ESubscribeForm = ({ className }: { className?: string }) => {
+  const [registerData, setRegisterData] = useState<IUserPost>({
+    firstName: "",
+    lastName: "",
+    mail: "",
+    password: "",
+    dateOfBirth: ""
+  });
+  const [errors, setErrors] = useState<{ [key: string]: string }>({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    confirm: "",
+    date: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
   const methods = useForm();
 
-  const onSubmit = methods.handleSubmit(async (data) => {
-    const res = await postUSer({
-      firstName: data.first,
-      lastName: data.last,
-      mail: data.mail,
-      password: data.password,
-      dateOfBirth: data.date,
-    });
-    console.log(res);
-  });
+  const handleFieldChange = (field: string, value: string) => {
+    const errorMessage = validateField(value, fieldValidations[field]);
+    setErrors((prevErrors) => ({ ...prevErrors, [field]: errorMessage || "" }));
+    setRegisterData((prevData) => ({ ...prevData, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = registerData;
+
+    if (Object.values(errors).every((error) => error === "")) {
+      const payload = {
+        firstname: formData.firstName,
+        lastname: formData.lastName,
+        email: formData.mail,
+        password: formData.password,
+        birthday: formData.dateOfBirth,
+      };
+
+      const res = await API.Post("auth/register", payload);
+      logger.debug(res);
+    } else {
+      logger.error("Il y a des erreurs dans le formulaire");
+    }
+
+    logger.debug(formData);
+  };
+
   return (
     <FormProvider {...methods}>
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        noValidate
-        className={"container " + className}
-      >
+      <form onSubmit={handleSubmit} className={"container " + className}>
         <EInput
-          label="first"
+          label="First name"
+          id="firstname"
           type="text"
-          id="first"
           placeholder="First name"
-          name="first"
-          {...name_validation}
+          hasLabel={false}
+          name="firstName"
+          onChange={(e) => handleFieldChange("firstname", e.target.value)}
+          error={errors["firstname"]}
         />
         <EInput
-          label="last"
+          label="Last name"
+          id="lastname"
           type="text"
-          id="last"
           placeholder="Last name"
-          name="last"
-          {...name_validation}
+          hasLabel={false}
+          name="lastName"
+          onChange={(e) => handleFieldChange("lastname", e.target.value)}
+          error={errors["lastname"]}
         />
         <EInput
-          label="mail"
-          type="text"
+          label="Email"
           id="mail"
-          placeholder="mail"
-          {...mail_validation}
+          type="text"
+          placeholder="Email"
+          hasLabel={false}
+          name="mail"
+          onChange={(e) => handleFieldChange("email", e.target.value)}
+          error={errors["email"]}
         />
         <EInput
-          label="password"
-          type="password"
+          label="Password"
           id="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Password"
-          {...password_validation}
+          hasLabel={false}
+          name="password"
+          onChange={(e) => handleFieldChange("password", e.target.value)}
+          error={errors["password"]}
         />
+        <button
+          type="button"
+          className="password-toggle"
+          onClick={() => setShowPassword((prev) => !prev)}
+        >
+          {showPassword ? "Hide" : "Show"}
+        </button>
         <EInput
-          label="confirm"
-          type="password"
-          id="confirm"
-          placeholder="Confirm"
-          name="confirm"
-          validation={{
-            required: {
-              value: true,
-              message: "required",
-            },
-            minLength: {
-              value: 6,
-              message: "Must be at least 6 characters long.",
-            },
-            maxLength: {
-              value: 20,
-              message: "Must be at max 20 characters long.",
-            },
-            validate: (val: any) =>
-              val === methods.watch("password") || "Password does not match",
-          }}
-        />
-        <EInput
-          label="date"
-          type="date"
-          name="date"
+          label="Date of Birth"
           id="date"
-          placeholder="date"
-          validation={{
-            required: {
-              value: true,
-              message: "required",
-            },
-          }}
+          type="text"
+          placeholder="Date of Birth"
+          hasLabel={false}
+          name="dateOfBirth"
+          onChange={(e) => handleFieldChange("date", e.target.value)}
+          error={errors["date"]}
         />
-        <EButton classArray={["login__button"]} onClick={onSubmit}>Subscribe</EButton>
+        <EButton classArray={["login__button"]}>
+          Register
+        </EButton>
       </form>
     </FormProvider>
   );

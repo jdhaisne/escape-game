@@ -4,30 +4,19 @@ import { findInputError } from "../utils/findInputError";
 import { isFormInvalid } from "../utils/isFormInvalid";
 import { EInputError } from "./EInputError";
 
-interface EInputProps {
-  label: string;
-  id: string;
-  type: string;
-  placeholder: string;
-  hasLabel?: boolean;
-  validation: any;
-  name: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  error : string;
-}
 
-export const EInput: React.FC<EInputProps> = ({
+
+export const EInput: React.FC<IEInputForm> = ({
   label,
   id,
   type,
   placeholder,
   hasLabel,
-  validation,
   name,
   onChange,
   error
 }) => {
-  const { register, formState: { errors } } = useFormContext();
+  const { formState: { errors } } = useFormContext();
   const inputError = findInputError(errors, name);
   const isInvalid = isFormInvalid(inputError);
 
@@ -44,7 +33,6 @@ export const EInput: React.FC<EInputProps> = ({
         id={id}
         type={type}
         placeholder={placeholder}
-        {...register(name, validation)}
         onChange={onChange}
       />
       <p style={{color : 'red'}}>{error}</p>

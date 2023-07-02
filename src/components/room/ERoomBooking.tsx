@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { logger } from "../../services/ESLogger";
 import { useForm, FormProvider } from "react-hook-form";
-import { EFormBooking } from "../EFormBooking";
 import { IBooking } from "../../interfaces/IBooking";
+import { EFormBooking } from "../EFormBooking";
 
 
 export const ERoomBooking: React.FunctionComponent = () => {
@@ -26,10 +26,9 @@ export const ERoomBooking: React.FunctionComponent = () => {
   };
 
   const renderFormBookings = () => {
-    return bookingData.map((booking, index) => (
+    return bookingData.map((_, index) => (
       <EFormBooking
         key={index}
-        bookingData={bookingData}
         index={index}
         onChange={handleFormBookingChange}
       />

@@ -1,18 +1,10 @@
-export interface EButtonProps {
+export interface IEButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
   classArray?: string[];
 }
 
-export enum EInputStatus {
-  DEFAULT,
-  ALERT,
-  SUCCESS,
-  WARNING,
-  ERROR,
-}
-
-export interface ERoom {
+export interface IERoom {
   _id: string;
   image: string;
   name: string;
@@ -20,4 +12,4 @@ export interface ERoom {
   age_limit: string;
 }
 
-export type ERooms = ERoom[];
+export type ERooms = IERoom[];

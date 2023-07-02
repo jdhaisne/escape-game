@@ -7,9 +7,9 @@ export const EFooter = () => {
           +33 12 34 56 78 90</p>
       </div>
       <div className="footer__section footer-middle">
-        <p>Mentions légales</p>
-        <p>Conditions Générales d'Utilisation</p>
-        <p>Contact</p>
+      <p>Legal Notice</p>
+      <p>Terms and Conditions</p>
+      <p>Contact</p>
       </div>
       <div className="footer__section footer-social-media">
         <div className="facebook"></div>
