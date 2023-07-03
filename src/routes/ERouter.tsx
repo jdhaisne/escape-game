@@ -3,6 +3,7 @@ import { EHomePage } from "../pages/EHome-page";
 import { EHeader } from "../components/EHeader-component";
 import { EFooter } from "../components/EFooter-component";
 import { ELoginPage } from "../pages/ELogin-page";
+import { ERoomPage } from "../pages/ERoom-page";
 
 export const ERouter = createBrowserRouter([
     {
@@ -21,6 +22,17 @@ export const ERouter = createBrowserRouter([
         return <>
           <EHeader/>
           <ELoginPage/>
+          <EFooter/>
+        </>
+      },
+    },
+
+    {
+      path: "/rooms/:id",
+      Component() {
+        return <>
+          <EHeader/>
+          <ERoomPage/>
           <EFooter/>
         </>
       },

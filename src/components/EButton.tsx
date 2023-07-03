@@ -1,6 +1,6 @@
-import { EButtonProps } from "../interfaces/interface_App";
+import { IEButtonProps } from "../interfaces/interface_App";
 
-export const EButton = ({ children, onClick, classArray }: EButtonProps) => {
+export const EButton = ({ children, onClick, classArray }: IEButtonProps) => {
 
   const classStr = classArray ? classArray.join(" ") : "";
   return (

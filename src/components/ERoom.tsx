@@ -1,5 +1,3 @@
-//image, titre, desc, age
-
 import { EPegi } from "./EPegi";
 
 export const ERoom = ({
@@ -19,8 +17,7 @@ export const ERoom = ({
       <img
         className="room__img"
         src={imgPath}
-        width="300px
-      "
+        width="300px"
         height="200px"
       />
       <div className="room__title__wrapper">
@@ -28,8 +25,8 @@ export const ERoom = ({
       </div>
       <div className="room__desc">{desc}</div>
       <div className="room__footer">
-        <span className="room__link">detail</span>
-        <span className="room__link">reserver</span>
+        <span className="room__link">details</span>
+        <span className="room__link">book</span>
         <EPegi age={parseInt(age)}></EPegi>
       </div>
     </div>

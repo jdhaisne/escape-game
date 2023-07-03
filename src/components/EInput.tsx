@@ -1,68 +1,41 @@
-// import { EInputStatus } from "../interfaces/interface_App";
+import React from "react";
 import { useFormContext } from "react-hook-form";
-import { motion } from "framer-motion";
 import { findInputError } from "../utils/findInputError";
 import { isFormInvalid } from "../utils/isFormInvalid";
+import { EInputError } from "./EInputError";
 
-export const EInput = ({
+
+
+export const EInput: React.FC<IEInputForm> = ({
   label,
   id,
   type,
   placeholder,
   hasLabel,
-  validation,
   name,
-}: {
-  label: string;
-  id: string;
-  type: string;
-  placeholder: string;
-  hasLabel?: boolean;
-  validation: any;
-  name: any;
+  onChange,
+  error
 }) => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
-
-  const inputError = findInputError(errors, label);
+  const { formState: { errors } } = useFormContext();
+  const inputError = findInputError(errors, name);
   const isInvalid = isFormInvalid(inputError);
+
   return (
-    <>
-      <div>
-        {" "}
-        {hasLabel ? (
-          <div>
-            <label htmlFor={id}>{label}</label>
-          </div>
-        ) : (
-          <></>
-        )}
-        {isInvalid && (
-          <EInputError
-            message={inputError.error.message}
-            key={inputError.error.message}
-          />
-        )}
-        <input
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          {...register(name, validation)}
-        />
-      </div>
-    </>
+    <div>
+      {hasLabel && <label htmlFor={id}>{label}</label>}
+      {isInvalid && (
+        <EInputError
+        message={(inputError as any)?.error?.message || ""}
+        key={(inputError as any)?.error?.message || ""}
+      />
+      )}
+      <input
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+      />
+      <p style={{color : 'red'}}>{error}</p>
+    </div>
   );
-};
-
-const EInputError = ({ message }: { message: string }) => {
-  return <motion.p {...framer_error}>{message}</motion.p>;
-};
-
-const framer_error = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 10 },
-  transition: { duration: 0.2 },
 };
