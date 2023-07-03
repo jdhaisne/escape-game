@@ -1,13 +1,15 @@
 import { IContextData } from "../interfaces/IContextData";
 
-export const User = {
+export const SUser = {
 
     getData() : IContextData | null
     {
-        //TODO
-        // CHECK IF DATA FROM STORAGE EXIST THEN IF TRUE RETURN DATA FROM THE LOCAL STORAGE AND RETURN IT AS OBJECT.
-        // ELSE RETURN EMPTY NULL
-        return null;
+        const userData = localStorage.getItem('userData');
+        
+        if(!userData)
+            return null;
+
+        return JSON.parse(userData);
     },
 
     getId()  : string | null
@@ -18,5 +20,10 @@ export const User = {
     isAdmin () : boolean 
     {
         return !!this.getData()?.isAdmin;
+    },
+
+    isConnected () : boolean 
+    {
+        return !!this.getData();
     }
 }

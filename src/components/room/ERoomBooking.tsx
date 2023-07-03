@@ -3,16 +3,51 @@ import { logger } from "../../services/ESLogger";
 import { useForm, FormProvider } from "react-hook-form";
 import { IBooking } from "../../interfaces/IBooking";
 import { EFormBooking } from "../EFormBooking";
+import { useNavigate } from "react-router-dom";
+import { API } from "../../services/ESAPI";
+import { SUser } from "../../services/ESUser";
 
 
-export const ERoomBooking: React.FunctionComponent = () => {
-  const [bookingData, setBookingData] = useState<IBooking[]>([{ firstName: "", lastName: "", birthday: "" }]);
-  const methods = useForm(); // Initialize the useForm hook
+export const ERoomBooking: React.FunctionComponent<{room_id : string}> = ({ room_id }) => {
+  const [bookingData, setBookingData] = useState<IBooking[]>([{ firstname: "", lastname: "", birthday: "" }]);
+  const [slots, setSlots] = useState<number>(1);
+
+  const methods = useForm();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = bookingData; // Retrieve the form data from the bookingData state
-    logger.debug(formData);
+  
+    const formData = bookingData; 
+
+    const isFormValid = formData.every(participant =>
+        participant.firstname.trim() !== "" &&
+        participant.lastname.trim() !== "" &&
+        participant.birthday.trim() !== ""
+    );
+
+    // Check if the form is valid : 
+    if (!isFormValid)
+      return logger.error("Fill all the inputs.");
+
+
+    // Check if the user is connected  : 
+    if(!SUser.isConnected() && !SUser.getId()) 
+      return logger.error("You need to be connected to make a booking.");
+
+    const payload  = {
+        user_id: SUser.getId(),
+        room_id: room_id,
+        date_and_time: Date.now(),
+        number_of_players: slots,
+        list_of_participants: formData
+    }
+
+    API.Post('bookings',payload);
+
+    navigate('/');
+
+    logger.debug(payload);
   };
 
   const handleFormBookingChange = (index: number, field: string, value: string) => {
@@ -44,7 +79,7 @@ export const ERoomBooking: React.FunctionComponent = () => {
       for (let i = 0; i < diff; i++) {
         newBookingData = [
           ...newBookingData,
-          { firstName: "", lastName: "", birthday: "" }
+          { firstname: "", lastname: "", birthday: "" }
         ];
       }
     } else if (value < bookingData.length) {
@@ -52,6 +87,7 @@ export const ERoomBooking: React.FunctionComponent = () => {
     }
   
     setBookingData(newBookingData);
+    setSlots(value);
   };
 
   const renderCounterSlotOptions = () => {

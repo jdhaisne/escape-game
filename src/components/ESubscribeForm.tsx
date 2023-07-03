@@ -48,7 +48,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
         birthday: formData.birthday,
       };
 
-      const res = await API.Post("auth/register", payload);
+      await API.Post("auth/register", payload);
       navigate("/login");
     } else {
       logger.error("Il y a des erreurs dans le formulaire");
