@@ -1,11 +1,14 @@
 import { EButton } from "./EButton";
 import { EInput } from "./EInput";
 import { FormProvider, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { validateField } from "../services/ESFieldValidation";
 import { fieldValidations } from "../utils/formValidation";
 import { logger } from "../services/ESLogger";
 import { API } from "../services/ESAPI";
+import { AppContext, IAppContext } from "../context/app-ctx";
+import { useNavigate } from "react-router-dom";
+
 
 interface FormData {
   email: string;
@@ -13,6 +16,9 @@ interface FormData {
 }
 
 export const ELoginForm = ({ className }: { className?: string }) => {
+  const navigate = useNavigate();
+  const appContext = useContext<IAppContext | null>(AppContext);
+
   const [loginData, setLoginData] = useState<FormData>({
     email: "",
     password: "",
@@ -34,20 +40,28 @@ export const ELoginForm = ({ className }: { className?: string }) => {
     const { email, password } = loginData;
 
     if (Object.values(errors).every((error) => error === "")) {
+      try {
         const res = await API.Post("auth/login", { email, password });
         if (res.status === 200) {
-          logger.debug("Logged in successfully");
-          // TODO : redirecting to another page
-        } else {
+          const storedUserData = localStorage.getItem('userData');
+          if (!storedUserData)  
+          {
+            appContext?.setCanStoreData(true);
+            appContext?.setUserData(res.data);
+          }
+          navigate("/");
+        } 
+        else {
           logger.error("Login failed: Invalid credentials");
           setShowErrorMessage(true);
         }
+      } catch (error) {
+        logger.error("Login failed: Internal Server Error");
+      }
     } else {
       logger.error("There are errors in the form");
     }
-
-    logger.debug(loginData);
-  };
+  }
 
   const handleFieldChange = (field: string, value: string) => {
     const errorMessage = validateField(value, fieldValidations[field]);

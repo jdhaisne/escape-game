@@ -4,9 +4,9 @@ interface IUser {
 }
 
 interface IUserPost {
-    firstName: string;
-    lastName: string;
-    mail: string
+    firstname: string;
+    lastname: string;
+    email: string
     password: string
-    dateOfBirth: string
+    birthday: string
 }
