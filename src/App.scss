@@ -323,3 +323,68 @@ input {
 .target-register {
   background-color: #a46bab;
 }
+
+//CALENDAR
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar__btn-bloc {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar__btn {
+  height: 5rem;
+  width: 10rem;
+  margin: 10px;
+  text-transform: uppercase;
+  color: #FFF;
+  background-color: #876BAB;
+  border: 1px solid #876BAB;
+}
+
+.calendar__btn:hover {
+  margin: 10px;
+  text-transform: uppercase;
+  color: #876BAB;
+  border: 1px solid #876BAB;
+  background-color: #FFF;
+}
+
+.booking__btn {
+  text-transform: uppercase;
+  color: #FFF;
+  background-color: #a46bab;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  height: 3rem;
+  width: 20rem;
+  text-align: center;
+  border: 1px solid #a46bab;
+  margin-top: 10px;
+}
+
+.booking__btn:hover {
+  text-transform: uppercase;
+  color: #a46bab;
+  background-color: #FFF;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  height: 3rem;
+  width: 20rem;
+  text-align: center;
+  border: 1px solid #a46bab;
+  margin-top: 10px;
+}
+
+.booking__btn--clicked,
+.calendar__btn--clicked {
+  background-color: #FF5E02;
+  border: 1px solid #FF5E02;
+  color: #FFF;
+}
