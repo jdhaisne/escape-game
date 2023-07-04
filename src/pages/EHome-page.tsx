@@ -3,8 +3,9 @@ import { logger } from "../services/ESLogger";
 import { getRooms } from "../services/ESRooms";
 import { EShowRooms } from "../components/EShowRooms";
 import { ERooms } from "../interfaces/interface_App";
+import { ECalendar } from "../components/ECalendar";
 
-// import { ECalendar } from "../components/ECalendar";
+
 
 export const EHomePage: React.FunctionComponent = () => {
   const [rooms, setRooms] = useState<ERooms>([]);
@@ -26,6 +27,7 @@ export const EHomePage: React.FunctionComponent = () => {
 
   return (
     <>
+      <ECalendar></ECalendar>
       <div className="homepage">
         <h1 className="homepage__title">PAGE FROM HOME !</h1>
         <div className="homepage__rooms-wrapper">

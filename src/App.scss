@@ -20,6 +20,7 @@ body {
   width: 100%;
 }
 
+// ---------------------------- HEADER -----------------------
 .header {
   display: flex;
   flex-direction: row;
@@ -44,34 +45,34 @@ body {
     background: gray;
     width: 300px;
   }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: #FF5E02;
+    width: 15rem;
+    height: 2rem;
+    border: 1px solid #FF5E02;
+    border-radius: 20px;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+    &:hover {
+      color: #FF5E02;
+      background-color: #FFF;
+      border: 1px solid #FFF;
+    }
+  }
 }
 
-.header__button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  background-color: #FF5E02;
-  width: 15rem;
-  height: 2rem;
-  border: 1px solid #FF5E02;
-  border-radius: 20px;
-  color: #FFF;
-  font-size: 14px;
-  font-weight: 600;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-.header__button:hover {
-  color: #FF5E02;
-  background-color: #FFF;
-  border: 1px solid #FFF;
-}
-
-//FOOTER
+// ---------------------------- FOOTER -----------------------
 .footer-social-media {
   display: flex;
   flex-wrap: wrap;
