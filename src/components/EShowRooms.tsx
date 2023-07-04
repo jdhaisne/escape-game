@@ -2,7 +2,6 @@ import { ERooms } from "../interfaces/interface_App";
 import { ERoom } from "./ERoom";
 
 export const EShowRooms = ({ rooms }: { rooms: ERooms }) => {
-  console.log(rooms);
   const roomsList = rooms.map((room) => (
     <ERoom
       imgPath={room.image}
