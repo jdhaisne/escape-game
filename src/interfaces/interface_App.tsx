@@ -26,7 +26,7 @@ export interface IEUser {
   isAdmin: boolean;
   __v?: number;
 }
-export interface IEHistory {
+export interface IEBooking {
   _id: string;
   user_id: string;
   room_id: string;
@@ -36,3 +36,5 @@ export interface IEHistory {
   users: IEUser[];
   rooms: ERooms;
 }
+
+export type IEBookings = IEBooking[];

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { API } from "../services/ESAPI";
-import { IEHistory } from "../interfaces/interface_App";
+import { IEBookings } from "../interfaces/interface_App";
 import { useParams } from "react-router-dom";
 import { logger } from "../services/ESLogger";
 
 export const EHistory = () => {
   let { userId } = useParams();
-  const [bookings, setBookings] = useState<IEHistory[]>([]);
+  const [bookings, setBookings] = useState<IEBookings>([]);
   const createbookingsList = () => {
     if (!bookings) return <></>;
     return bookings.map((booking) => {
