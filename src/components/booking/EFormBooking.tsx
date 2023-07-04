@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { EInput } from "./EInput";
-import { validateField } from "../services/ESFieldValidation";
-import { fieldValidations } from "../utils/formValidation";
+import { EInput } from "../input/EInput";
+import { validateField } from "../../services/ESFieldValidation";
+import { fieldValidations } from "../../utils/formValidation";
 
 export const EFormBooking: React.FC<IEFormBooking> = ({
   index,

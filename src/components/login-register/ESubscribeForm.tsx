@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { API } from "../services/ESAPI";
-import { validateField } from "../services/ESFieldValidation";
-import { EButton } from "./EButton";
-import { EInput } from "./EInput";
+import { API } from "../../services/ESAPI";
+import { validateField } from "../../services/ESFieldValidation";
+import { EButton } from "../button/EButton";
+import { EInput } from "../input/EInput";
 import { FormProvider, useForm } from "react-hook-form";
-import { fieldValidations } from "../utils/formValidation";
-import { logger } from "../services/ESLogger";
+import { fieldValidations } from "../../utils/formValidation";
+import { logger } from "../../services/ESLogger";
 import { useNavigate } from "react-router-dom";
+
+import './style.scss'
+
 
 export const ESubscribeForm = ({ className }: { className?: string }) => {
   const [registerData, setRegisterData] = useState<IUserPost>({

@@ -1,5 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { SUser } from "../services/ESUser";
+import { SUser } from "../../services/ESUser";
+
+import './style.scss'
+
 
 export const EHeader = () => {
   const isLoggedIn = SUser.isConnected();

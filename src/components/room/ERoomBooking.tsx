@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { logger } from "../../services/ESLogger";
 import { useForm, FormProvider } from "react-hook-form";
 import { IBooking } from "../../interfaces/IBooking";
-import { EFormBooking } from "../EFormBooking";
+import { EFormBooking } from "../booking/EFormBooking";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../services/ESAPI";
 import { SUser } from "../../services/ESUser";
 
+import './style.scss'
 
 export const ERoomBooking: React.FunctionComponent<{room_id : string}> = ({ room_id }) => {
   const [bookingData, setBookingData] = useState<IBooking[]>([{ firstname: "", lastname: "", birthday: "" }]);

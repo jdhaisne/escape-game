@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ELoginForm } from "../components/ELoginForm";
-import { ESubscribeForm } from "../components/ESubscribeForm";
+import { ESubscribeForm } from "../components/login-register/ESubscribeForm";
+import { ELoginForm } from "../components/login-register/ELoginForm";
 
 export const ELoginPage = () => {
   const [stateLog, setStateLog] = useState<string>("login")

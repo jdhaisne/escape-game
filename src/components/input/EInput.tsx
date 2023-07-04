@@ -1,5 +1,7 @@
 import React from "react";
 
+import './style.scss'
+
 export const EInput: React.FC<IEInputForm> = ({
   label,
   id,
@@ -14,6 +16,7 @@ export const EInput: React.FC<IEInputForm> = ({
     <div>
       {hasLabel && <label htmlFor={id}>{label}</label>}
       <input
+        className="EInput"
         id={id}
         type={type}
         placeholder={placeholder}

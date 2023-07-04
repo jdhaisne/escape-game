@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { EShowRooms } from "../components/EShowRooms";
 import { ERooms } from "../interfaces/interface_App";
 import { getRooms } from "../services/ESRooms";
+import { EShowRooms } from "../components/room/EShowRooms";
 
 export const EHomePage: React.FunctionComponent = () => {
   const [rooms, setRooms] = useState<ERooms>([]);
@@ -11,11 +11,7 @@ export const EHomePage: React.FunctionComponent = () => {
 
   return (
     <>
-      <div className="homepage">
-        <div className="homepage__rooms-wrapper">
-          {rooms && <EShowRooms rooms={rooms}></EShowRooms>}
-        </div>
-      </div>
+      {rooms && <EShowRooms rooms={rooms}></EShowRooms>}
     </>
   );
 };

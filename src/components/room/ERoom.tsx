@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { EPegi } from "./EPegi";
-import { logger } from "../services/ESLogger";
+import { EPegi } from "./pegi-img/EPegi";
+import { logger } from "../../services/ESLogger";
+
+import './style.scss'
 
 export const ERoom = ({
   _id,
