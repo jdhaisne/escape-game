@@ -22,7 +22,7 @@ export const ECalendar = () => {
                     />
                 </div>
                 <div className='"calendar__btn-bloc'>
-                    <EButton classArray={["calendar__btn", `${clicked ? "calendar__btn--clicked" : ""}`]} onClick={() => setClicked(!clicked)}>Matin</EButton> <EButton classArray={["calendar__btn"]} >Après-Midi</EButton>
+                    <EButton classArray={["calendar__btn", `${clicked ? "calendar__btn--clicked" : ""}`]} onClick={() => setClicked(!clicked)}>Matin</EButton> <EButton classArray={["calendar__btn", `${!clicked ? "calendar__btn--clicked" : clicked}`]} onClick={() => setClicked(!clicked)}>Après-Midi</EButton>
 
                     <div className="booking__btn-bloc">
                         <EButton classArray={['booking__btn']}>Je réserve</EButton>
