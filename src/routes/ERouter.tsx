@@ -46,7 +46,7 @@ export const ERouter = createBrowserRouter([
 
   },
   {
-    path: "/Bookings/:userId",
+    path: "/history/:userId",
     Component() {
       return (
         <>

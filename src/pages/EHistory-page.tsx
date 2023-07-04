@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { API } from "../services/ESAPI";
 import { IEBookings } from "../interfaces/interface_App";
 import { useParams } from "react-router-dom";
-import { logger } from "../services/ESLogger";
 
 export const EHistory = () => {
   let { userId } = useParams();
@@ -32,7 +31,6 @@ export const EHistory = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await API.Get(`bookings/${userId}`);
-      console.log(res.data);
       setBookings(res.data);
     };
 

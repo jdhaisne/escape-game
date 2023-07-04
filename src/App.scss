@@ -29,6 +29,13 @@ body {
   align-items: center;
   background-color: #876BAB;
 
+  &__wrapper 
+  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
   &__logo {
     width: 15em;
     height: 9rem;
@@ -62,6 +69,12 @@ body {
   font-size: 14px;
   font-weight: 600;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.header__history
+{
+  background-color: #0cbb29;
+  border: 1px solid #0cbb29;
 }
 
 .header__button:hover {

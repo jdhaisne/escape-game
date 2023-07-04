@@ -20,13 +20,23 @@ export const EHeader = () => {
         <NavLink to="/">
           <div className="header__logo"></div>
         </NavLink>
-        <NavLink
-          to={isLoggedIn ? "/" : "/login"}
-          className={"header__button " + (isLoggedIn ? "logout" : "login")}
-          onClick={isLoggedIn ? handleLogout : undefined}
-        >
-          {isLoggedIn ? "logout" : "login"}
-        </NavLink>
+
+        <div className="header__wrapper"> 
+          {isLoggedIn && (<NavLink
+            to={`history/${SUser.getId()}`}
+            className={"header__button header__history"}
+          >
+            History
+          </NavLink>)}
+          
+          <NavLink
+            to={isLoggedIn ? "/" : "/login"}
+            className={"header__button " + (isLoggedIn ? "logout" : "login")}
+            onClick={isLoggedIn ? handleLogout : undefined}
+          >
+            {isLoggedIn ? "logout" : "login"}
+          </NavLink>
+        </div>
       </div>
     </>
   );
