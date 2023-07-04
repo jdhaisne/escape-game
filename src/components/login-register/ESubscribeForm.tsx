@@ -6,10 +6,9 @@ import { EInput } from "../input/EInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { fieldValidations } from "../../utils/formValidation";
 import { logger } from "../../services/ESLogger";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 import './style.scss'
-
 
 export const ESubscribeForm = ({ className }: { className?: string }) => {
   const [registerData, setRegisterData] = useState<IUserPost>({
@@ -30,6 +29,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
 
   const [showPassword, setShowPassword] = useState(false);
   const methods = useForm();
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
 
   const handleFieldChange = (field: string, value: string) => {
     const errorMessage = validateField(value, fieldValidations[field]);
@@ -39,7 +39,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const navigate = useNavigate();
+
     const formData = registerData;
 
     if (Object.values(errors).every((error) => error === "")) {
@@ -51,14 +51,22 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
         birthday: formData.birthday,
       };
 
-      await API.Post("auth/register", payload);
-      navigate("/login");
+      try {
+        await API.Post("auth/register", payload);
+        setRedirectToLogin(true);
+      } catch (e : any) {
+        logger.error(`Error registering user: ${e}`);
+      }
     } else {
       logger.error("Il y a des erreurs dans le formulaire");
     }
 
     logger.debug(formData);
   };
+
+  if (redirectToLogin) {
+    redirect("/login");
+  }
 
   return (
     <FormProvider {...methods}>
@@ -105,29 +113,25 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           error={errors["date"]}
         />
 
-
         <div className="form-register-password">
-            <EInput
-              label="Password"
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              hasLabel={false}
-              name="password"
-              onChange={(e) => handleFieldChange("password", e.target.value)}
-              error={errors["password"]}
-            />
-            <button
-              type="button"
-              className="password-toggle"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
+          <EInput
+            label="Password"
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            hasLabel={false}
+            name="password"
+            onChange={(e) => handleFieldChange("password", e.target.value)}
+            error={errors["password"]}
+          />
+          <button
+            type="button"
+            className="password-toggle"
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
         </div>
-       
-   
-
 
         <EButton classArray={["login__button"]}>
           Register

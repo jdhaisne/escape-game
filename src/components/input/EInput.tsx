@@ -16,7 +16,6 @@ export const EInput: React.FC<IEInputForm> = ({
     <div>
       {hasLabel && <label htmlFor={id}>{label}</label>}
       <input
-        className="EInput"
         id={id}
         type={type}
         placeholder={placeholder}

@@ -1,64 +1,49 @@
 $primary-colors: #876BAB;
 $secondary-colors: #5F4C78;
 
+
 //FOOTER
 .footer-social-media {
-    &__wrapper {
-      display: flex;
-    flex-wrap: wrap;
-    margin: 0px 5px;
-    }
-    &__logo {
-      background-size: contain;
-    height: 35px;
-    width: 35px;
-    margin: 0px 5px;
-    &--twitter {
-  background-image: url(./img/twitter.png);
-    }
-    &--facebook {
-      background-image: url(./img/facebook.png);
-    }
-    &--instagram {
-          background-image: url(./img/instagram.png);
-    }
-    }
-  }
-    
-  
-  
-  
-  // .facebook {
-  //   background-image: url(./img/facebook.png);
-  // }
-  
-  // .instagram {
-  //   background-image: url(./img/instagram.png);
-  // }
-  
-  // .twitter {
-    
-  // }
-  
-  .footer {
+  &__wrapper {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: row;
-    justify-content: space-around;
-    background-color: $primary-colors;
-    height: 100px;
-    width: 100%;
-    align-items: center;
-    &__section 
-    {
-        color: #FFF;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        padding: 10px 0px;
-        font-size: 12px;
-
-        & > p {
-            margin: 5px 0px;
-        }
-    }
+  flex-wrap: wrap;
+  margin: 0px 5px;
+  }
+  &__logo {
+    background-size: contain;
+  height: 35px;
+  width: 35px;
+  margin: 0px 5px;
+  &--twitter {
+background-image: url(./img/twitter.png);
+  }
+  &--facebook {
+    background-image: url(./img/facebook.png);
+  }
+  &--instagram {
+        background-image: url(./img/instagram.png);
+  }
+  }
 }
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: $primary-colors;
+  height: 100px;
+  width: 100%;
+  align-items: center;
+&__section {
+    color: #FFF;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 10px 0px;
+  font-size: 12px;
+&>p {
+  margin: 5px 0px;
+}
+}
+}
+
