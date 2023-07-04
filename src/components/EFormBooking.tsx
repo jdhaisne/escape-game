@@ -8,8 +8,8 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
   onChange
 }) => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     birthday: ""
   });
 
@@ -29,21 +29,21 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
       <h4>Participant {index + 1}</h4>
       <EInput
         label="First Name"
-        id={`firstName`}
+        id={`firstname`}
         type="text"
         placeholder="First Name"
         hasLabel={false}
-        name={`firstName`}
+        name={`firstname`}
         onChange={(e) => handleFieldChange("firstname", e.target.value)}
         error={errors["firstname"]}
       />
       <EInput
         label="Last Name"
-        id={`lastName`}
+        id={`lastname`}
         type="text"
         placeholder="Last Name"
         hasLabel={false}
-        name={`lastName`}
+        name={`lastname`}
         onChange={(e) => handleFieldChange("lastname", e.target.value)}
         error={errors["lastname"]}
       />
@@ -54,8 +54,8 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
         placeholder="Date of Birth"
         hasLabel={false}
         name={`birthday`}
-        onChange={(e) => handleFieldChange("date", e.target.value)}
-        error={errors["date"]}
+        onChange={(e) => handleFieldChange("birthday", e.target.value)}
+        error={errors["birthday"]}
       />
     </div>
   );

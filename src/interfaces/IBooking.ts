@@ -1,6 +1,6 @@
 export interface IBooking {
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     birthday: string;
 }
   
