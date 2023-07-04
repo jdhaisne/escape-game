@@ -6,14 +6,15 @@ import { EInput } from "./EInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { fieldValidations } from "../utils/formValidation";
 import { logger } from "../services/ESLogger";
+import { useNavigate } from "react-router-dom";
 
 export const ESubscribeForm = ({ className }: { className?: string }) => {
   const [registerData, setRegisterData] = useState<IUserPost>({
-    firstName: "",
-    lastName: "",
-    mail: "",
+    firstname: "",
+    lastname: "",
+    email: "",
     password: "",
-    dateOfBirth: ""
+    birthday: ""
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({
     firstname: "",
@@ -21,7 +22,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
     email: "",
     password: "",
     confirm: "",
-    date: "",
+    birthday: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -35,19 +36,20 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const navigate = useNavigate();
     const formData = registerData;
 
     if (Object.values(errors).every((error) => error === "")) {
       const payload = {
-        firstname: formData.firstName,
-        lastname: formData.lastName,
-        email: formData.mail,
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        email: formData.email,
         password: formData.password,
-        birthday: formData.dateOfBirth,
+        birthday: formData.birthday,
       };
 
-      const res = await API.Post("auth/register", payload);
-      logger.debug(res);
+      await API.Post("auth/register", payload);
+      navigate("/login");
     } else {
       logger.error("Il y a des erreurs dans le formulaire");
     }
@@ -64,7 +66,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="First name"
           hasLabel={false}
-          name="firstName"
+          name="firstname"
           onChange={(e) => handleFieldChange("firstname", e.target.value)}
           error={errors["firstname"]}
         />
@@ -74,7 +76,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Last name"
           hasLabel={false}
-          name="lastName"
+          name="lastname"
           onChange={(e) => handleFieldChange("lastname", e.target.value)}
           error={errors["lastname"]}
         />
@@ -84,7 +86,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Email"
           hasLabel={false}
-          name="mail"
+          name="email"
           onChange={(e) => handleFieldChange("email", e.target.value)}
           error={errors["email"]}
         />
@@ -111,8 +113,8 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Date of Birth"
           hasLabel={false}
-          name="dateOfBirth"
-          onChange={(e) => handleFieldChange("date", e.target.value)}
+          name="birthday"
+          onChange={(e) => handleFieldChange("birthday", e.target.value)}
           error={errors["date"]}
         />
         <EButton classArray={["login__button"]}>

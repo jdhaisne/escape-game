@@ -43,6 +43,7 @@ export const ERouter = createBrowserRouter([
         </>
       );
     },
+
   },
   {
     path: "/Bookings/:userId",
@@ -57,3 +58,4 @@ export const ERouter = createBrowserRouter([
     },
   },
 ]);
+

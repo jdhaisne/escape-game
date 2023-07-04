@@ -48,4 +48,11 @@ export const fieldValidations: { [key: string]: IFieldValidation } = {
         message: "Invalid lastname format. Please use letters only.",
       },
     },
+    birthday: {
+      required: { value: true, message: "Field is required" },
+      pattern: {
+        value: /^\d{2}\/\d{2}\/\d{4}$/,
+        message: "Invalid date format. Please use DD/MM/YYYY",
+      },
+    },
 };
