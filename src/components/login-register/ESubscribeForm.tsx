@@ -6,7 +6,7 @@ import { EInput } from "../input/EInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { fieldValidations } from "../../utils/formValidation";
 import { logger } from "../../services/ESLogger";
-import { redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import './style.scss'
 
@@ -18,6 +18,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
     password: "",
     birthday: ""
   });
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({
     firstname: "",
     lastname: "",
@@ -42,7 +43,8 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
 
     const formData = registerData;
 
-    if (Object.values(errors).every((error) => error === "")) {
+    if (Object.values(errors).every((error) => error === "")) 
+    {
       const payload = {
         firstname: formData.firstname,
         lastname: formData.lastname,
@@ -54,18 +56,16 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
       try {
         await API.Post("auth/register", payload);
         setRedirectToLogin(true);
-      } catch (e : any) {
+      } catch (e : any ) {
         logger.error(`Error registering user: ${e}`);
       }
     } else {
       logger.error("Il y a des erreurs dans le formulaire");
     }
-
-    logger.debug(formData);
   };
 
   if (redirectToLogin) {
-    redirect("/login");
+    return <Navigate replace to="/" />;
   }
 
   return (
