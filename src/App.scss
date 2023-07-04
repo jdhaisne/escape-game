@@ -394,6 +394,33 @@ input {
 
 
 
+.history {
+display: flex;
+height: 100%;
+justify-content: center;
+
+flex-direction: column;
+text-align: center;
+gap: 15px;
+justify-content: flex-start;
+padding: 20px;
+&__title {
+  font-size: 2rem;
+}
+& table {
+  font-size: 1.5rem;
+}
+& th {
+  border: 1px solid black;
+}
+& thead th {
+  background-color: $secondary-colors;
+  color: white;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+}
+
 // Error Message "EINPUT ERROR COMPONENT"
 .error-message
 {
@@ -403,3 +430,4 @@ input {
   margin-top: 1rem;
   width: 30rem;
 }
+
