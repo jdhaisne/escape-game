@@ -15,7 +15,15 @@ export const EHistory = () => {
           <th>{booking.rooms[0].name}</th>
           <th>{booking.date_and_time}</th>
           <th>{booking.number_of_players}</th>
-          {/* <th>{booking.users.map(() =>)}</th> */}
+          <th>
+            {booking.users.map((user) => {
+              return (
+                <span
+                  key={user._id}
+                >{`${user.firstname} ${user.lastname}`}</span>
+              );
+            })}
+          </th>
         </tr>
       );
     });
@@ -24,26 +32,23 @@ export const EHistory = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await API.Get(`bookings/${userId}`);
+      console.log(res.data);
       setBookings(res.data);
-      // console.log(bookings);
     };
 
     fetchData();
   }, []);
-  // const historyList = history.map((cur) => {
-  //   return (<tr>
-  //     <th>{cur.roomID}</th>
-  //   </tr>);
-  // });
+
   return (
     <div className="history">
+      <h2 className="history__title">Booking history of </h2>
       <table>
         <thead>
           <tr>
             <th>room</th>
             <th>date</th>
             <th>number of player</th>
-            {/* <th>player list</th> */}
+            <th>player list</th>
           </tr>
         </thead>
         <tbody>{createbookingsList()}</tbody>
