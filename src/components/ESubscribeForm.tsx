@@ -90,33 +90,42 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           onChange={(e) => handleFieldChange("email", e.target.value)}
           error={errors["email"]}
         />
-        <EInput
-          label="Password"
-          id="password"
-          type={showPassword ? "text" : "password"}
-          placeholder="Password"
-          hasLabel={false}
-          name="password"
-          onChange={(e) => handleFieldChange("password", e.target.value)}
-          error={errors["password"]}
-        />
-        <button
-          type="button"
-          className="password-toggle"
-          onClick={() => setShowPassword((prev) => !prev)}
-        >
-          {showPassword ? "Hide" : "Show"}
-        </button>
+
         <EInput
           label="Date of Birth"
           id="date"
           type="text"
           placeholder="Date of Birth"
           hasLabel={false}
-          name="birthday"
-          onChange={(e) => handleFieldChange("birthday", e.target.value)}
+          name="date"
+          onChange={(e) => handleFieldChange("date", e.target.value)}
           error={errors["date"]}
         />
+
+
+        <div className="form-register-password">
+            <EInput
+              label="Password"
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              hasLabel={false}
+              name="password"
+              onChange={(e) => handleFieldChange("password", e.target.value)}
+              error={errors["password"]}
+            />
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+        </div>
+       
+   
+
+
         <EButton classArray={["login__button"]}>
           Register
         </EButton>

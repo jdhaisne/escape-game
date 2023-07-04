@@ -18,6 +18,8 @@ interface FormData {
 export const ELoginForm = ({ className }: { className?: string }) => {
   const navigate = useNavigate();
   const appContext = useContext<IAppContext | null>(AppContext);
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const [loginData, setLoginData] = useState<FormData>({
     email: "",
@@ -89,16 +91,25 @@ export const ELoginForm = ({ className }: { className?: string }) => {
           onChange={(e) => handleFieldChange("email", e.target.value)}
           error={errors["email"]}
         />
-        <EInput
-          label="Password"
-          id="password"
-          type="password"
-          placeholder="Type your password..."
-          hasLabel={false}
-          name="password"
-          onChange={(e) => handleFieldChange("password", e.target.value)}
-          error={errors["password"]}
-        />
+      <div className="form-register-password">
+            <EInput
+              label="Password"
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              hasLabel={false}
+              name="password"
+              onChange={(e) => handleFieldChange("password", e.target.value)}
+              error={errors["password"]}
+            />
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+        </div>
 
         {showErrorMessage && (
           <p className="error-message">Invalid credentials</p>

@@ -14,7 +14,7 @@ export const fieldValidations: { [key: string]: IFieldValidation } = {
       maxLength: { value: 20, message: "Must contain at most 20 characters" },
       pattern: {
         value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/,
-        message: "Your password must contain special characters, at least one uppercase letter, and be between 6 and 20 characters long",
+        message: "Password should be 6-20 characters long with at least one uppercase letter and special characters.",
       },
     },
     date: {
