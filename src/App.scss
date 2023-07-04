@@ -44,22 +44,18 @@ body {
     background: gray;
     width: 300px;
   }
-  &:hover {
-    background-color: red;
-  }
 }
 
 .header__button {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  margin: 10rem;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   background-color: #FF5E02;
-  width: 15rem;
-  height: 2rem;
+  padding: 0.8rem 3rem;
   border: 1px solid #FF5E02;
   border-radius: 20px;
   color: #FFF;
