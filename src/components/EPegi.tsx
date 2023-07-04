@@ -17,7 +17,7 @@ export const EPegi = ({ age }: { age: number }) => {
       "https://pegi.info/sites/default/files/inline-images/age-18-black%202_0.jpg";
   return (
     <div>
-      <img src={imgPath} width="136px" height="166px" />
+      <img className="img-pegi" src={imgPath} width="136px" height="166px" />
     </div>
   );
 };
