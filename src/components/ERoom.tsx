@@ -1,23 +1,28 @@
+import { NavLink } from "react-router-dom";
 import { EPegi } from "./EPegi";
+import { logger } from "../services/ESLogger";
 
 export const ERoom = ({
+  _id,
   imgPath,
   title,
   desc,
   age,
 }: {
-  key: string;
+  _id: string;
   imgPath: string;
   title: string;
   desc: string;
   age: string;
 }) => {
+  logger.debug(_id)
+
   return (
     <div className="room">
       <img
         className="room__img"
         src={imgPath}
-        width="300px"
+        width="100%"
         height="200px"
       />
       <div className="room__title__wrapper">
@@ -25,9 +30,18 @@ export const ERoom = ({
       </div>
       <div className="room__desc">{desc}</div>
       <div className="room__footer">
-        <span className="room__link">details</span>
-        <span className="room__link">book</span>
-        <EPegi age={parseInt(age)}></EPegi>
+        <div>
+          <NavLink className={"room__link"} to={`rooms/${_id}`}>
+            <p className="room__link__item">book</p>
+          </NavLink>
+
+          <NavLink className={"room__link"} to={`/`}>
+            <p className="room__link__item">[soon]</p>
+          </NavLink>
+        </div>
+        <div>
+          <EPegi age={parseInt(age)}></EPegi>
+        </div>
       </div>
     </div>
   );

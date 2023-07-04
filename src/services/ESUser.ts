@@ -25,5 +25,10 @@ export const SUser = {
     isConnected () : boolean 
     {
         return !!this.getData();
+    },
+
+    logout () : void 
+    {
+        localStorage.removeItem("userData");
     }
 }

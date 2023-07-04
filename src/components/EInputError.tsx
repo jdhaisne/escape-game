@@ -1,1 +1,0 @@
-export const EInputError = ({ message }: { message: string }) => {   return <p style={{ color: "red" }}>{message}</p>; };

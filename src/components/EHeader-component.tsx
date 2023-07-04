@@ -1,28 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { SUser } from "../services/ESUser";
 
 export const EHeader = () => {
-  // const [isShowing, setIsShowing] = useState<boolean>(false);
-  // const [isLoginForm, setIsLoginForm] = useState<boolean>(true);
-  // const onClick = () => {
-  //   setIsShowing(!isShowing);
-  // };
-  // const onSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post("http://localhost:3000/users", {
-  //       mail: e.target.mail.value,
-  //       password: e.target.password.value,
-  //     })
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
-  // const onSubmitSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
-  //   console.log(e);
-  // };
+  const isLoggedIn = SUser.isConnected();
+  const navigate = useNavigate();
+
+  const handleLogout: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.preventDefault();
+
+    SUser.logout();
+
+    // Redirect the user to the login page after logout
+    navigate("/login");
+  };
+
   return (
     <>
       <div className="header">
@@ -30,40 +21,13 @@ export const EHeader = () => {
           <div className="header__logo"></div>
         </NavLink>
         <NavLink
-          to="/login"
-          className={"header__button " + ((isPending: boolean, isActive: boolean) => isPending ? "pending" : isActive ? "active" : "")}
-        >Log In
+          to={isLoggedIn ? "/" : "/login"}
+          className={"header__button " + (isLoggedIn ? "logout" : "login")}
+          onClick={isLoggedIn ? handleLogout : undefined}
+        >
+          {isLoggedIn ? "logout" : "login"}
         </NavLink>
-        {/* <EButton classArray={[]} onClick={onClick}></EButton> */}
       </div>
-
-      {/* <EModal
-        isShowing={isShowing}
-        setIsShowing={setIsShowing}
-        classArray={["header__modal"]}
-      >
-        {isLoginForm ? (
-          <>
-            <ELoginForm onSubmit={onSubmitLogin}></ELoginForm>
-            <p>
-              need an account ?{" "}
-              <a href="#" onClick={() => setIsLoginForm(false)}>
-                sign in
-              </a>
-            </p>
-          </>
-        ) : (
-          <>
-            <ESubscribeForm onSubmit={onSubmitSubscribe}></ESubscribeForm>
-            <p>
-              Already have an account ?{" "}
-              <a href="#" onClick={() => setIsLoginForm(true)}>
-                login
-              </a>
-            </p>
-          </>
-        )}
-      </EModal> */}
     </>
   );
 };

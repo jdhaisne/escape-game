@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.tsx';
-import './index.scss';
 import { AppContext, IAppContext } from './context/app-ctx.ts';
 import { IContextData } from './interfaces/IContextData.ts';
-import { logger } from './services/ESLogger.ts';
+import './index.scss';
 
 
 const AppInitializer: React.FunctionComponent = () => {
@@ -27,7 +26,6 @@ const AppInitializer: React.FunctionComponent = () => {
     if (!storedUserData && canStoreData) {
       localStorage.setItem("userData", JSON.stringify(userData));
       setCanStoreData(false);
-      logger.debug(userData);
     }
   }, [userData]);
 
