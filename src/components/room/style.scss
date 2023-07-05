@@ -7,7 +7,6 @@ $secondary-colors: #5F4C78;
     height: auto;
     padding: 2rem;
     background-color: gray;
-    margin: 2rem auto;
     border-radius: 1.5rem;
     text-align: center;
     color: white;
@@ -17,15 +16,14 @@ $secondary-colors: #5F4C78;
 .img_wrapper
 {
     display: flex;
-    margin: 1rem;
     width: 50rem;
     height: 30rem;
     background: #000;
 
     .img 
     {
-        width: 100%;
-        height: auto;
+      width: 100%;
+      height: auto;
     }
 }
 
@@ -134,7 +132,7 @@ $secondary-colors: #5F4C78;
   font-weight: bold;
   font-size: 3.2rem;
   color: rgba(41, 38, 38, 0.918);
-  margin: 2rem auto;
+  margin-top: 2rem;
 }
 
 .ERoomBooking-title
@@ -143,7 +141,6 @@ $secondary-colors: #5F4C78;
   font-weight: bold;
   font-size: 2.5rem;
   color: rgba(41, 38, 38, 0.918);
-  margin: 2rem auto;
 }
 
 .ERoomBoking-btn

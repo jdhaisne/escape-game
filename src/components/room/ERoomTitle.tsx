@@ -1,6 +1,6 @@
 import './style.scss'
 
-export const ERoomTitle : React.FunctionComponent = () => 
+export const ERoomTitle : React.FunctionComponent<{title : string}> = ({title}) => 
 {
-    return <h1 className='ERoom-title'>Titre de la room</h1>
+    return <h1 className='ERoom-title'>{title}</h1>
 }

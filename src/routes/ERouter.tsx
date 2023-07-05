@@ -5,15 +5,28 @@ import { ERoomPage } from "../pages/ERoom-page";
 import { EHistory } from "../pages/EHistory-page";
 import { ELoginPage } from "../pages/ELogin-page";
 import { EHomePage } from "../pages/EHome-page";
+import { ENotFoundPage } from "../pages/ENotFound-page";
 
 export const ERouter = createBrowserRouter([
   {
-    path: "/",
+    path: "/rooms/:id",
     Component() {
       return (
         <>
           <EHeader />
-          <EHomePage />
+          <ERoomPage />
+          <EFooter />
+        </>
+      );
+    },
+  },
+  {
+    path: "/history/:userId",
+    Component() {
+      return (
+        <>
+          <EHeader />
+          <EHistory />
           <EFooter />
         </>
       );
@@ -31,31 +44,28 @@ export const ERouter = createBrowserRouter([
       );
     },
   },
-
   {
-    path: "/rooms/:id",
+    path: "/",
     Component() {
       return (
         <>
           <EHeader />
-          <ERoomPage />
+          <EHomePage />
           <EFooter />
         </>
       );
     },
-
   },
   {
-    path: "/history/:userId",
+    path: "*",
     Component() {
       return (
         <>
           <EHeader />
-          <EHistory />
+          <ENotFoundPage />
           <EFooter />
         </>
       );
     },
   },
 ]);
-
