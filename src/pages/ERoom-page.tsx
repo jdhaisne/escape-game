@@ -19,20 +19,21 @@ export const ERoomPage = () =>
 
     let { id } = useParams();
 
+    // if for some reason the id doesn't exist we pass it '404'
     id ??= '404';
 
     if (id === '404')
         return <h1>Room no found</h1>
 
     useEffect(() => getRoomByID(id!, setRoom), []);
-
-
     
-    return <div>
-        <ERoomTitle/>
+    return(
+    <>
         <div className="ERoomPage-container">
-            <ERoomImage/>
-            <ERoomBooking room_id={id || '404'}/>
+            <ERoomTitle title={room.name}/>
+            <ERoomImage image={room.image}/>
+            <ERoomBooking room_id={id}/>
         </div>
-    </div>
+    </>
+    )
 }
