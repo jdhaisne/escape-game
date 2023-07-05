@@ -43,8 +43,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
 
     const formData = registerData;
 
-    if (Object.values(errors).every((error) => error === "")) 
-    {
+    if (Object.values(errors).every((error) => error === "")) {
       const payload = {
         firstname: formData.firstname,
         lastname: formData.lastname,
@@ -56,7 +55,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
       try {
         await API.Post("auth/register", payload);
         setRedirectToLogin(true);
-      } catch (e : any ) {
+      } catch (e: any) {
         logger.error(`Error registering user: ${e}`);
       }
     } else {
