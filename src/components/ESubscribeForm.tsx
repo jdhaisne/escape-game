@@ -14,7 +14,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
     lastname: "",
     email: "",
     password: "",
-    birthday: ""
+    birthday: "",
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({
     firstname: "",
@@ -24,6 +24,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
     confirm: "",
     birthday: "",
   });
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const methods = useForm();
@@ -36,7 +37,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const navigate = useNavigate();
+
     const formData = registerData;
 
     if (Object.values(errors).every((error) => error === "")) {
@@ -102,33 +103,27 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           error={errors["date"]}
         />
 
-
         <div className="form-register-password">
-            <EInput
-              label="Password"
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              hasLabel={false}
-              name="password"
-              onChange={(e) => handleFieldChange("password", e.target.value)}
-              error={errors["password"]}
-            />
-            <button
-              type="button"
-              className="password-toggle"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
+          <EInput
+            label="Password"
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            hasLabel={false}
+            name="password"
+            onChange={(e) => handleFieldChange("password", e.target.value)}
+            error={errors["password"]}
+          />
+          <button
+            type="button"
+            className="password-toggle"
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
         </div>
-       
-   
 
-
-        <EButton classArray={["login__button"]}>
-          Register
-        </EButton>
+        <EButton classArray={["login__button"]}>Register</EButton>
       </form>
     </FormProvider>
   );
