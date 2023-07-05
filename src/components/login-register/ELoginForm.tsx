@@ -10,6 +10,7 @@ import { validateField } from "../../services/ESFieldValidation";
 import { fieldValidations } from "../../utils/formValidation";
 import { EInput } from "../input/EInput";
 import { EButton } from "../button/EButton";
+import { EntypoEye, EntypoEyeWithLine } from '../EEye';
 
 interface FormData {
   email: string;
@@ -46,13 +47,12 @@ export const ELoginForm = ({ className }: { className?: string }) => {
         const res = await API.Post("auth/login", { email, password });
         if (res.status === 200) {
           const storedUserData = localStorage.getItem('userData');
-          if (!storedUserData)  
-          {
+          if (!storedUserData) {
             appContext?.setCanStoreData(true);
             appContext?.setUserData(res.data);
           }
           navigate("/");
-        } 
+        }
         else {
           logger.error("Login failed: Invalid credentials");
           setShowErrorMessage(true);
@@ -91,24 +91,30 @@ export const ELoginForm = ({ className }: { className?: string }) => {
           onChange={(e) => handleFieldChange("email", e.target.value)}
           error={errors["email"]}
         />
-      <div className="form-register-password">
-            <EInput
-              label="Password"
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              hasLabel={false}
-              name="password"
-              onChange={(e) => handleFieldChange("password", e.target.value)}
-              error={errors["password"]}
-            />
-            <button
-              type="button"
-              className="password-toggle"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
+        <div className="form-register-password">
+          <EInput
+            label="Password"
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            hasLabel={false}
+            name="password"
+            onChange={(e) => handleFieldChange("password", e.target.value)}
+            error={errors["password"]}
+          />
+          <button
+            type="button"
+            className="password-toggle"
+          >
+            {showPassword ?
+              (<EntypoEyeWithLine
+                className='eye-icon'
+                onClick={() => setShowPassword((prev) => !prev)} />)
+              :
+              (<EntypoEye
+                className="eye-icon"
+                onClick={() => setShowPassword((prev) => !prev)} />)}
+          </button>
         </div>
 
         {showErrorMessage && (
@@ -118,7 +124,7 @@ export const ELoginForm = ({ className }: { className?: string }) => {
         <EButton classArray={["login__button"]}>
           Login
         </EButton>
-     
+
       </form>
     </FormProvider>
   );

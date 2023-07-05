@@ -7,6 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { fieldValidations } from "../../utils/formValidation";
 import { logger } from "../../services/ESLogger";
 import { Navigate } from "react-router-dom";
+import { EntypoEye, EntypoEyeWithLine } from '../EEye';
 
 import './style.scss'
 
@@ -126,9 +127,16 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           <button
             type="button"
             className="password-toggle"
-            onClick={() => setShowPassword((prev) => !prev)}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ?
+              (<EntypoEyeWithLine
+                className='eye-icon'
+                onClick={() => setShowPassword((prev) => !prev)} />)
+              :
+              (<EntypoEye
+                className="eye-icon"
+                onClick={() => setShowPassword((prev) => !prev)} />)}
+
           </button>
         </div>
 
