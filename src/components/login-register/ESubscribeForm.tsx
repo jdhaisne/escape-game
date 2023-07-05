@@ -104,13 +104,13 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
 
         <EInput
           label="Date of Birth"
-          id="date"
+          id="birthday"
           type="text"
           placeholder="Date of Birth"
           hasLabel={false}
-          name="date"
-          onChange={(e) => handleFieldChange("date", e.target.value)}
-          error={errors["date"]}
+          name="birthday"
+          onChange={(e) => handleFieldChange("birthday", e.target.value)}
+          error={errors["birthday"]}
         />
 
         <div className="form-register-password">
