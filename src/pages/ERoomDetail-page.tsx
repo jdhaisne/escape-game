@@ -6,7 +6,7 @@ import { ERoomImage } from "../components/room/ERoomImage";
 import { ERoomBooking } from "../components/room/ERoomBooking";
 import { IERoom } from "../interfaces/interface_App";
 
-export const ERoomPage = () => {
+export const ERoomDetailPage = () => {
   const { id } = useParams();
   const [room, setRoom] = useState<IERoom>({
     _id: "",
@@ -32,8 +32,6 @@ export const ERoomPage = () => {
     }
   }, [id]);
 
-
-  // TODO : MAKE A LOADING COMPONENT AND STYLE IT
   if (!room._id && id !== '404') {
     return <h1>Loading...</h1>;
   }
