@@ -103,17 +103,18 @@ export const ERoomBooking: React.FunctionComponent<{room_id : string}> = ({ room
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit}>
-        <h3>VOYEZ CE JEU EXQUIS</h3>
-        <div>
-          <label htmlFor="counterSlot">Nombre de participants :</label>
-          <select id="counterSlot" value={bookingData.length} onChange={handleCounterSlotChange}>
+      <form className="ERoomBooking-form" onSubmit={handleSubmit}>
+        <h3 className="ERoomBooking-title">Reserve your entry ticket.</h3>
+        <div className="ERoomingBooking-wrapper-participant">
+          <label className="ERoomBooking-participants" htmlFor="counterSlot">Number of participants:</label>
+          <select className="ERoomBooking-slot" id="counterSlot" value={bookingData.length} onChange={handleCounterSlotChange}>
             {renderCounterSlotOptions()}
           </select>
         </div>
 
-        <div>{renderFormBookings()}</div>
-        <button type="submit">Valider votre réservation</button>
+        <div className="ERoomBooking-container">{renderFormBookings()}
+          <button className="ERoomBoking-btn" type="submit">Confirm your reservation</button>
+        </div>
       </form>
     </FormProvider>
   );

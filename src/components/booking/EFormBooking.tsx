@@ -3,6 +3,8 @@ import { EInput } from "../input/EInput";
 import { validateField } from "../../services/ESFieldValidation";
 import { fieldValidations } from "../../utils/formValidation";
 
+import './style.scss'
+
 export const EFormBooking: React.FC<IEFormBooking> = ({
   index,
   onChange
@@ -25,8 +27,8 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
   };
 
   return (
-    <div>
-      <h4>Participant {index + 1}</h4>
+    <div className="EFormBooking-card">
+      <h4 className="EFormBooking-card__title">Participant {index + 1}</h4>
       <EInput
         label="First Name"
         id={`firstname`}

@@ -11,7 +11,7 @@ export const ERoomPage = () =>
     return <h1>Room no found</h1>
     return <div>
         <ERoomTitle/>
-        <div style={{display: 'flex'}}>
+        <div className="ERoomPage-container">
             <ERoomImage/>
             <ERoomBooking room_id={id || '404'}/>
         </div>
