@@ -9,7 +9,7 @@ export const ECalendar = () => {
     const [clicked, setClicked] = useState(false);
 
     const BookingChoice = () => {
-
+        console.log(value, clicked)
     }
 
     return (
@@ -25,7 +25,7 @@ export const ECalendar = () => {
                     <EButton classArray={["calendar__btn", `${clicked ? "calendar__btn--clicked" : ""}`]} onClick={() => setClicked(!clicked)}>Matin</EButton> <EButton classArray={["calendar__btn", `${!clicked ? "calendar__btn--clicked" : clicked}`]} onClick={() => setClicked(!clicked)}>Après-Midi</EButton>
 
                     <div className="booking__btn-bloc">
-                        <EButton classArray={['booking__btn']}>Je réserve</EButton>
+                        <EButton classArray={['booking__btn']} onClick={BookingChoice}>Je réserve</EButton>
                     </div>
                 </div>
             </div>
