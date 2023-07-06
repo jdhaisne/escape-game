@@ -112,21 +112,28 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
         participant.birthday.trim() !== ""
     );
   
-    if (!isFormValid) {
+    if (!isFormValid || selectedDay === "") {
+
+      appContext?.setNotif({
+        txt: "Fill all the inputs.",
+        type: ENotifType.ERROR,
+        bShow: true,
+      });
+
       return logger.error("Fill all the inputs.");
     }
   
     if (!SUser.isConnected() && !SUser.getId()) {
       
       appContext?.setNotif({
-        txt: "You have to be connected to book a room !",
+        txt: "You need to be connected to make a booking.",
         type: ENotifType.ERROR,
         bShow: true,
       });
 
       return logger.error("You need to be connected to make a booking.");
     }
-  
+
     const payload = {
       user_id: SUser.getId(),
       room_id: room_id,
@@ -165,19 +172,19 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
             console.error("Error updating room availability:", error);
           });
 
+          appContext?.setNotif({
+            txt: "You have booked a room !",
+            type: ENotifType.SUCCESS,
+            bShow: true,
+          });
+    
+          navigate("/");
+
         return {
           ...prevRoom,
           availability: updatedAvailability,
         };
       });
-
-      appContext?.setNotif({
-        txt: "You have booked a room !",
-        type: ENotifType.SUCCESS,
-        bShow: true,
-      });
-
-      navigate("/");
     })
     .catch((error) => {
       console.error("Error making booking:", error);
@@ -210,7 +217,7 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
 
     if (value > bookingData.length) {
       const diff = value - bookingData.length;
-      for (let i =0; i < diff; i++) {
+      for (let i = 0; i < diff; i++) {
         newBookingData = [
           ...newBookingData,
           { firstname: "", lastname: "", birthday: "" }
@@ -258,7 +265,6 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
   return (
     <FormProvider {...methods}>
       <form className="ERoomBooking-form" onSubmit={handleSubmit}>
-        <h3 className="ERoomBooking-title">Reserve your entry ticket.</h3>
         <div className="ERoomingBooking-wrapper-participant">
           <label className="ERoomBooking-participants" htmlFor="counterSlot">Number of participants:</label>
           <select className="ERoomBooking-slot" id="counterSlot" value={bookingData.length} onChange={handleCounterSlotChange}>
@@ -267,11 +273,11 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
         </div>
 
         <div className="ERoomBooking-wrapper-day">
-          <label className="ERoomBooking-day" htmlFor="selectDay">
+          <label className="ERoomBooking-select-day" htmlFor="selectDay">
             Select a day:
           </label>
           <select
-            className="ERoomBooking-select-day"
+          
             id="selectDay"
             onChange={handleDayChange}
           >
@@ -282,7 +288,7 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
 
         {renderFormBookings()}
 
-        <button type="submit">Submit</button>
+        <button className="ERoomBoking-btn" type="submit">Submit</button>
       </form>
     </FormProvider>
   );

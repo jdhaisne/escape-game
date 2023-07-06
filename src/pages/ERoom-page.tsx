@@ -99,8 +99,11 @@ export const ERoomPage = () => {
   return (
     <>
       <div className="ERoomPage-container">
-        <ERoomTitle title={room.name} />
-        <ERoomImage image={room.image} />
+        <div className="ERoomPage-wrapper">
+          <ERoomImage image={room.image} />
+          <ERoomTitle title={room.name} />
+        </div>
+       
         {id && <ERoomBooking room_id={id} />}
       </div>
     </>

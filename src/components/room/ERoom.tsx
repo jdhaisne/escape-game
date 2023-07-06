@@ -1,13 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { EPegi } from "./pegi-img/EPegi";
 import { SUser } from "../../services/ESUser";
-
-import "./style.scss";
 import { EModal } from "../modal/EModal";
 import { useEffect, useState } from "react";
 import { ERoomFormUpdate } from "./ERoomFormUpdate";
 import { isRoomAvailable } from "../../services/ESRooms";
 import { logger } from "../../services/ESLogger";
+
+
+import "./style.scss";
+
 
 export const ERoom = ({
   _id,
@@ -78,6 +80,8 @@ export const ERoom = ({
           </div>
         </div>
       </div>
+
+
       <EModal
         onClickOutside={(e) => {
           if (e.target.classList.contains("modal__outside"))
