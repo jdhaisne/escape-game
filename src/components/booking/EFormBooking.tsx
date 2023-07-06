@@ -35,7 +35,6 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
         type="text"
         placeholder="First Name"
         hasLabel={false}
-        name={`firstname`}
         onChange={(e) => handleFieldChange("firstname", e.target.value)}
         error={errors["firstname"]}
       />
@@ -45,7 +44,6 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
         type="text"
         placeholder="Last Name"
         hasLabel={false}
-        name={`lastname`}
         onChange={(e) => handleFieldChange("lastname", e.target.value)}
         error={errors["lastname"]}
       />
@@ -55,7 +53,6 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
         type="text"
         placeholder="Date of Birth"
         hasLabel={false}
-        name={`birthday`}
         onChange={(e) => handleFieldChange("birthday", e.target.value)}
         error={errors["birthday"]}
       />

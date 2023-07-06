@@ -12,7 +12,6 @@ export const ERoomFormUpdate = ({
   name,
   description,
   age_limit,
-  onSubmit,
 }: {
   roomId: string;
   name: string;
@@ -57,12 +56,6 @@ export const ERoomFormUpdate = ({
   };
 
   const handleFieldChange = (field: string, value: string) => {
-    // const errorMessage = validateField(value, fieldValidations[field]);
-
-    // setErrors((prevErrors) => ({
-    //   ...prevErrors,
-    //   [field]: errorMessage || "",
-    // }));
     setUpdateData((prevData) => ({
       ...prevData,
       [field]: value,

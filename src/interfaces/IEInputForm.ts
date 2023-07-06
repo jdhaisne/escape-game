@@ -4,7 +4,6 @@ interface IEInputForm {
     type: string;
     placeholder: string;
     hasLabel?: boolean;
-    name: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     error : string;
 }
