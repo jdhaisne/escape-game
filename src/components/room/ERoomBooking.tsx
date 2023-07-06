@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { logger } from "../../services/ESLogger";
 import { useForm, FormProvider } from "react-hook-form";
 import { IBooking } from "../../interfaces/IBooking";
@@ -9,6 +9,8 @@ import { SUser } from "../../services/ESUser";
 import './style.scss'
 import { IERoom } from "../../interfaces/interface_App";
 import { getRoomByID } from "../../services/ESRooms";
+import { AppContext, IAppContext } from "../../context/app-ctx";
+import { ENotifType } from "../../enums/ENotification-enum";
 
 export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ room_id }) => {
   const methods = useForm();
@@ -17,6 +19,9 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
   const [bookingData, setBookingData] = useState<IBooking[]>([{ firstname: "", lastname: "", birthday: "" }]);
   const [slots, setSlots] = useState<number>(1);
   const [selectedDay, setSelectedDay] = useState("");
+
+  const appContext = useContext<IAppContext | null>(AppContext);
+
 
   const [room, setRoom] = useState<IERoom>({
     _id: "",
@@ -112,6 +117,13 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
     }
   
     if (!SUser.isConnected() && !SUser.getId()) {
+      
+      appContext?.setNotif({
+        txt: "You have to be connected to book a room !",
+        type: ENotifType.ERROR,
+        bShow: true,
+      });
+
       return logger.error("You need to be connected to make a booking.");
     }
   
@@ -157,6 +169,12 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
           ...prevRoom,
           availability: updatedAvailability,
         };
+      });
+
+      appContext?.setNotif({
+        txt: "You have booked a room !",
+        type: ENotifType.SUCCESS,
+        bShow: true,
       });
 
       navigate("/");

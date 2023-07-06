@@ -1,11 +1,13 @@
 import { EButton } from "../button/EButton";
 import { EInput } from "../input/EInput";
 import { FormProvider, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { API } from "../../services/ESAPI";
 import { logger } from "../../services/ESLogger";
 import { useNavigate } from "react-router-dom";
+import { AppContext, IAppContext } from "../../context/app-ctx";
+import { ENotifType } from "../../enums/ENotification-enum";
 
 export const ERoomFormUpdate = ({
   roomId,
@@ -33,22 +35,30 @@ export const ERoomFormUpdate = ({
   const methods = useForm<FormData>();
   const navigate = useNavigate();
 
+
+  const appContext = useContext<IAppContext | null>(AppContext);
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const { roomName, desc } = updateData;
-    console.log("submit", roomName);
+
     try {
       const res = await API.Put(`rooms/${roomId}`, {
         name: roomName,
         description: desc,
       });
       if (res.status === 200) {
-        console.log("updated");
+        appContext?.setNotif({
+          txt: "Room updated !",
+          type: ENotifType.ERROR,
+          bShow: true,
+        });
+
         navigate(0);
       } else {
         logger.error("update failed");
-        // setShowErrorMessage(true);
       }
     } catch (error) {
       logger.error("Login failed: Internal Server Error");
