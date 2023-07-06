@@ -77,7 +77,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="First name"
           hasLabel={false}
-          name="firstname"
           onChange={(e) => handleFieldChange("firstname", e.target.value)}
           error={errors["firstname"]}
         />
@@ -87,7 +86,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Last name"
           hasLabel={false}
-          name="lastname"
           onChange={(e) => handleFieldChange("lastname", e.target.value)}
           error={errors["lastname"]}
         />
@@ -97,7 +95,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Email"
           hasLabel={false}
-          name="email"
           onChange={(e) => handleFieldChange("email", e.target.value)}
           error={errors["email"]}
         />
@@ -108,7 +105,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Date of Birth"
           hasLabel={false}
-          name="birthday"
           onChange={(e) => handleFieldChange("birthday", e.target.value)}
           error={errors["birthday"]}
         />
@@ -120,7 +116,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             hasLabel={false}
-            name="password"
             onChange={(e) => handleFieldChange("password", e.target.value)}
             error={errors["password"]}
           />

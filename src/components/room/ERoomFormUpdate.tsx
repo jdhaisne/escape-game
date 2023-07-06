@@ -2,19 +2,15 @@ import { EButton } from "../button/EButton";
 import { EInput } from "../input/EInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
-import { validateField } from "../../services/ESFieldValidation";
-import { fieldValidations } from "../../utils/formValidation";
 import { API } from "../../services/ESAPI";
 import { logger } from "../../services/ESLogger";
 import { useNavigate } from "react-router-dom";
-import { ETextarea } from "../input/ETextarea";
 
 export const ERoomFormUpdate = ({
   roomId,
   name,
   description,
   age_limit,
-  onSubmit,
 }: {
   roomId: string;
   name: string;
@@ -59,12 +55,6 @@ export const ERoomFormUpdate = ({
   };
 
   const handleFieldChange = (field: string, value: string) => {
-    // const errorMessage = validateField(value, fieldValidations[field]);
-
-    // setErrors((prevErrors) => ({
-    //   ...prevErrors,
-    //   [field]: errorMessage || "",
-    // }));
     setUpdateData((prevData) => ({
       ...prevData,
       [field]: value,
