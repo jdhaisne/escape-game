@@ -11,6 +11,33 @@ export interface IERoom {
   description: string;
   age_limit: string;
   slots: number;
+  availability: {
+    monday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    tuesday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    wednesday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    thursday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    friday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    saturday :
+    {
+      morning: boolean,
+      afternoon: boolean
+    }
+  };
   __v?: number;
 }
 

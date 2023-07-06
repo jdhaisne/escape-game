@@ -6,15 +6,28 @@ import { EHistory } from "../pages/EHistory-page";
 import { ELoginPage } from "../pages/ELogin-page";
 import { EHomePage } from "../pages/EHome-page";
 import { ENotFoundPage } from "../pages/ENotFound-page";
+import { ERoomDetailPage } from "../pages/ERoomDetail-page";
 
 export const ERouter = createBrowserRouter([
   {
-    path: "/rooms/:id",
+    path: "/book/:id",
     Component() {
       return (
         <>
           <EHeader />
           <ERoomPage />
+          <EFooter />
+        </>
+      );
+    },
+  },
+  {
+    path: "/room/:id",
+    Component() {
+      return (
+        <>
+          <EHeader />
+          <ERoomDetailPage />
           <EFooter />
         </>
       );

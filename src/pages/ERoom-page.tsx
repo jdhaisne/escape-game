@@ -15,6 +15,33 @@ export const ERoomPage = () => {
     description: "",
     age_limit: "",
     slots: 1,
+    availability: {
+      monday: {
+        morning: true,
+        afternoon: true
+      },
+      tuesday: {
+        morning: true,
+        afternoon: true
+      },
+      wednesday: {
+        morning: true,
+        afternoon: true
+      },
+      thursday: {
+        morning: true,
+        afternoon: true
+      },
+      friday: {
+        morning: true,
+        afternoon: true
+      },
+      saturday :
+      {
+        morning: true,
+        afternoon: true
+      }
+    }
   });
 
   useEffect(() => {
@@ -28,6 +55,33 @@ export const ERoomPage = () => {
         description: "",
         age_limit: "",
         slots: 1,
+        availability: {
+          monday: {
+            morning: true,
+            afternoon: true
+          },
+          tuesday: {
+            morning: true,
+            afternoon: true
+          },
+          wednesday: {
+            morning: true,
+            afternoon: true
+          },
+          thursday: {
+            morning: true,
+            afternoon: true
+          },
+          friday: {
+            morning: true,
+            afternoon: true
+          },
+          saturday :
+          {
+            morning: true,
+            afternoon: true
+          }
+        }
       });
     }
   }, [id]);
