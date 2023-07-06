@@ -9,20 +9,23 @@ export const EHistory = () => {
   const createbookingsList = () => {
     if (!bookings) return <></>;
     return bookings.map((booking) => {
+      console.log(booking);
       return (
         <tr key={booking.room_id}>
           <th>{booking.rooms[0].name}</th>
           <th>{booking.date_and_time}</th>
-          <th>{booking.number_of_players}</th>
-          <th>
-            {booking.users.map((user) => {
+
+          <th className="participants">
+            {booking.list_of_participants.map((user) => {
               return (
                 <span
                   key={user._id}
+                  className="participant"
                 >{`${user.firstname} ${user.lastname}`}</span>
               );
             })}
           </th>
+          <th>{booking.number_of_players}</th>
         </tr>
       );
     });
@@ -45,8 +48,8 @@ export const EHistory = () => {
           <tr>
             <th>room</th>
             <th>date</th>
-            <th>number of player</th>
             <th>player list</th>
+            <th>number of player</th>
           </tr>
         </thead>
         <tbody>{createbookingsList()}</tbody>

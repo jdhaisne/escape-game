@@ -12,6 +12,7 @@ export const EInput = ({
   onChange,
   error,
   value,
+  className,
 }: {
   label?: string;
   id: string;
@@ -21,11 +22,13 @@ export const EInput = ({
   onChange: (e?: any) => void;
   error?: string;
   value?: string | number;
+  className?: string;
 }) => {
   return (
     <div>
       {hasLabel && <label htmlFor={id}>{label}</label>}
       <input
+        className={className}
         id={id}
         type={type}
         placeholder={placeholder}

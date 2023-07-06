@@ -1,7 +1,5 @@
 @import url('./assets/styles/reset.scss');
-
-$primary-colors: #876BAB;
-$secondary-colors: #5F4C78;
+@import './assets/styles/variables.scss';
 
 
 
@@ -68,4 +66,16 @@ input {
   justify-content: center;
   align-items: center;  
   gap: 5rem;
+}
+
+.participants {
+  display:  flex;
+  flex-direction: column;
+
+}
+.participant {
+  border-bottom: 1px solid black;
+}
+.participant:last-of-type {
+  border: none;
 }

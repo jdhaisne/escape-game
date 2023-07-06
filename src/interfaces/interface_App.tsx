@@ -32,6 +32,12 @@ export interface IEBooking {
   room_id: string;
   date_and_time: string;
   number_of_players: number;
+  list_of_participants: {
+    _id: string;
+    birthday: string;
+    firstname: string;
+    lastname: string;
+  }[];
   __v?: number;
   users: IEUser[];
   rooms: ERooms;
