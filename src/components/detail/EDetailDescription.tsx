@@ -1,0 +1,1 @@
+export const EDetailDescription : React.FunctionComponent<{description : string}> = ({description}) => <p className='EDetail-description'>{description}</p>

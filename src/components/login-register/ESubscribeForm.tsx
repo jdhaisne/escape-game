@@ -60,7 +60,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
         logger.error(`Error registering user: ${e}`);
       }
     } else {
-      logger.error("Il y a des erreurs dans le formulaire");
+      logger.error("There are errors in the form");
     }
   };
 

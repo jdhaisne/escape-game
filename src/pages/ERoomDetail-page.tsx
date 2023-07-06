@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getRoomByID } from "../services/ESRooms";
-import { ERoomTitle } from "../components/room/ERoomTitle";
-import { ERoomImage } from "../components/room/ERoomImage";
-import { ERoomBooking } from "../components/room/ERoomBooking";
 import { IERoom } from "../interfaces/interface_App";
+import { EDetailImage } from "../components/detail/EDetailImage";
+import { EDetailTitle } from "../components/detail/EDetailTitle";
+import { EDetailDescription } from "../components/detail/EDetailDescription";
+import { EAvailability } from "../components/detail/EAvailability/EAvailability";
 
 export const ERoomDetailPage = () => {
   const { id } = useParams();
@@ -41,12 +42,14 @@ export const ERoomDetailPage = () => {
   }
 
   return (
-    <>
-      <div className="ERoomPage-container">
-        <ERoomTitle title={room.name} />
-        <ERoomImage image={room.image} />
-        {id && <ERoomBooking room_id={id} />}
+    <div className="ERoomDetailPage-container">
+      <div className="ERoomDetailPage-wrapper">
+        <EDetailImage image={room.image} />
+        <EDetailTitle title={room.name} />
+        <EDetailDescription description={room.description}/>
       </div>
-    </>
+
+      <EAvailability/>
+    </div>
   );
 };

@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { EPegi } from "./pegi-img/EPegi";
-import { logger } from "../../services/ESLogger";
 import { SUser } from "../../services/ESUser";
 
 import "./style.scss";
 import { EModal } from "../modal/EModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ERoomFormUpdate } from "./ERoomFormUpdate";
+import { isRoomAvailable } from "../../services/ESRooms";
+import { logger } from "../../services/ESLogger";
 
 export const ERoom = ({
   _id,
@@ -21,8 +22,21 @@ export const ERoom = ({
   desc: string;
   age: string;
 }) => {
-  logger.debug(_id);
   const [isModalShowing, setIsModalShowing] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(false);
+
+  const fetchAvailability = async () => {
+    try {
+      const available = await isRoomAvailable(_id);
+      setIsAvailable(available);
+    } catch (error) {
+      logger.error(`Error fetching availability ${error}`);
+    }
+  };
+
+  useEffect(() => {
+    fetchAvailability();
+  }, []);
 
   return (
     <>
@@ -34,19 +48,28 @@ export const ERoom = ({
         <div className="room__desc">{desc}</div>
         <div className="room__footer">
           <div>
-            <NavLink className={"room__link"} to={`rooms/${_id}`}>
-              <p className="room__link__item">book</p>
-            </NavLink>
 
-            <NavLink className={"room__link"} to={`/`}>
-              <p className="room__link__item">[soon]</p>
+            {SUser.isConnected() ? (
+              isAvailable ? (
+                <NavLink className={"room__link"} to={`book/${_id}`}>
+                  <p className="room__link__item">Booking</p>
+                </NavLink>
+              ) : (
+                <p className="room__link__item full">Room fully booked</p>
+              )
+            ) : (
+              <p className="room__link__item">Please log in to book</p>
+            )}
+         
+            <NavLink className={"room__link"} to={`/room/${_id}`}>
+              <p className="room__link__item">Details</p>
             </NavLink>
             {SUser.isAdmin() && (
               <p
                 className="room__link__item"
                 onClick={() => setIsModalShowing(true)}
               >
-                edit
+                Edit
               </p>
             )}
           </div>
@@ -57,7 +80,6 @@ export const ERoom = ({
       </div>
       <EModal
         onClickOutside={(e) => {
-          // console.log(e.target.classList.c);
           if (e.target.classList.contains("modal__outside"))
             setIsModalShowing(false);
         }}

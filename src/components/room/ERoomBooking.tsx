@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { logger } from "../../services/ESLogger";
 import { useForm, FormProvider } from "react-hook-form";
 import { IBooking } from "../../interfaces/IBooking";
@@ -6,52 +6,199 @@ import { EFormBooking } from "../booking/EFormBooking";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../services/ESAPI";
 import { SUser } from "../../services/ESUser";
-
 import './style.scss'
+import { IERoom } from "../../interfaces/interface_App";
+import { getRoomByID } from "../../services/ESRooms";
 
-export const ERoomBooking: React.FunctionComponent<{room_id : string}> = ({ room_id }) => {
-  const [bookingData, setBookingData] = useState<IBooking[]>([{ firstname: "", lastname: "", birthday: "" }]);
-  const [slots, setSlots] = useState<number>(1);
+// Ajoute cette interface à ton code
+interface IERoomAvailability {
+  monday: {
+    morning: boolean;
+    afternoon: boolean;
+  };
+  tuesday: {
+    morning: boolean;
+    afternoon: boolean;
+  };
+  wednesday: {
+    morning: boolean;
+    afternoon: boolean;
+  };
+  thursday: {
+    morning: boolean;
+    afternoon: boolean;
+  };
+  friday: {
+    morning: boolean;
+    afternoon: boolean;
+  };
+  saturday: {
+    morning: boolean;
+    afternoon: boolean;
+  };
+}
 
+export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ room_id }) => {
   const methods = useForm();
   const navigate = useNavigate();
 
+  const [bookingData, setBookingData] = useState<IBooking[]>([{ firstname: "", lastname: "", birthday: "" }]);
+  const [slots, setSlots] = useState<number>(1);
+  const [selectedDay, setSelectedDay] = useState("");
 
+  const [room, setRoom] = useState<IERoom>({
+    _id: "",
+    image: "",
+    name: "",
+    description: "",
+    age_limit: "",
+    slots: 1,
+    availability: {
+      monday: {
+        morning: true,
+        afternoon: true
+      },
+      tuesday: {
+        morning: true,
+        afternoon: true
+      },
+      wednesday: {
+        morning: true,
+        afternoon: true
+      },
+      thursday: {
+        morning: true,
+        afternoon: true
+      },
+      friday: {
+        morning: true,
+        afternoon: true
+      },
+      saturday:
+      {
+        morning: true,
+        afternoon: true
+      }
+    }
+  });
+
+  useEffect(() => {
+    if (room_id) {
+      getRoomByID(room_id, setRoom);
+    } else {
+      setRoom({
+        _id: '',
+        image: '',
+        name: '',
+        description: '',
+        age_limit: '',
+        slots: 1,
+        availability: {
+          monday: {
+            morning: true,
+            afternoon: true
+          },
+          tuesday: {
+            morning: true,
+            afternoon: true
+          },
+          wednesday: {
+            morning: true,
+            afternoon: true
+          },
+          thursday: {
+            morning: true,
+            afternoon: true
+          },
+          friday: {
+            morning: true,
+            afternoon: true
+          },
+          saturday: {
+            morning: true,
+            afternoon: true
+          }
+        }
+      });
+    }
+  }, [room_id]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   
-    const formData = bookingData; 
-
-    const isFormValid = formData.every(participant =>
+    const formData = bookingData;
+  
+    const isFormValid = formData.every(
+      (participant) =>
         participant.firstname.trim() !== "" &&
         participant.lastname.trim() !== "" &&
         participant.birthday.trim() !== ""
     );
-
-    // Check if the form is valid : 
-    if (!isFormValid)
+  
+    // Check if the form is valid:
+    if (!isFormValid) {
       return logger.error("Fill all the inputs.");
-
-
-    // Check if the user is connected  : 
-    if(!SUser.isConnected() && !SUser.getId()) 
-      return logger.error("You need to be connected to make a booking.");
-
-    const payload  = {
-        user_id: SUser.getId(),
-        room_id: room_id,
-        date_and_time: Date.now(),
-        number_of_players: slots,
-        list_of_participants: formData
     }
+  
+    // Check if the user is connected:
+    if (!SUser.isConnected() && !SUser.getId()) {
+      return logger.error("You need to be connected to make a booking.");
+    }
+  
+    // Handle the booking using the first available day and time
+    const payload = {
+      user_id: SUser.getId(),
+      room_id: room_id,
+      date_and_time: Date.now(),
+      number_of_players: slots,
+      list_of_participants: formData,
+    };
 
-    API.Post('bookings',payload);
 
-    navigate('/');
+    API.Post("bookings", payload)
+    .then(() => {
+      // Update the availability in the room state
+      setRoom((prevRoom) => {
+        if (!prevRoom) {
+          return room;
+        }
 
-    logger.debug(payload);
-  };
+        const updatedAvailability = { ...prevRoom.availability };
+
+        // Vérifier si un jour a été sélectionné
+        if (selectedDay) {
+          const dayAvailability = updatedAvailability[selectedDay as keyof typeof updatedAvailability];
+          const selectedTime = dayAvailability.morning ? "morning" : "afternoon";
+
+          updatedAvailability[selectedDay as keyof typeof updatedAvailability] = {
+            ...dayAvailability,
+            [selectedTime]: false,
+          };
+        }
+
+        // Faire une requête PUT pour mettre à jour la disponibilité de la salle sur le serveur
+        API.Put(`rooms/${room_id}/update-availability`, {
+          availability: updatedAvailability,
+        })
+          .then(() => {
+            setSelectedDay("");
+          })
+          .catch((error) => {
+            console.error("Error updating room availability:", error);
+          });
+
+        return {
+          ...prevRoom,
+          availability: updatedAvailability,
+        };
+      });
+
+      navigate("/");
+    })
+    .catch((error) => {
+      console.error("Error making booking:", error);
+    });
+};
 
   const handleFormBookingChange = (index: number, field: string, value: string) => {
     const updatedBookingData = bookingData.map((booking, i) => {
@@ -76,10 +223,10 @@ export const ERoomBooking: React.FunctionComponent<{room_id : string}> = ({ room
   const handleCounterSlotChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = parseInt(event.target.value);
     let newBookingData = [...bookingData];
-  
+
     if (value > bookingData.length) {
       const diff = value - bookingData.length;
-      for (let i = 0; i < diff; i++) {
+      for (let i =0; i < diff; i++) {
         newBookingData = [
           ...newBookingData,
           { firstname: "", lastname: "", birthday: "" }
@@ -88,7 +235,7 @@ export const ERoomBooking: React.FunctionComponent<{room_id : string}> = ({ room
     } else if (value < bookingData.length) {
       newBookingData = newBookingData.slice(0, value);
     }
-  
+
     setBookingData(newBookingData);
     setSlots(value);
   };
@@ -99,6 +246,29 @@ export const ERoomBooking: React.FunctionComponent<{room_id : string}> = ({ room
       options.push(<option key={i} value={i}>{i}</option>);
     }
     return options;
+  };
+
+  const renderDayOptions = () => {
+    const availableDays: string[] = [];
+  
+    // Loop through the room availability to find available days
+    Object.keys(room.availability).forEach((day) => {
+      const availability = room.availability[day as keyof typeof room.availability];
+      if (availability.morning || availability.afternoon) {
+        availableDays.push(day);
+      }
+    });
+  
+    return availableDays.map((day) => (
+      <option key={day} value={day}>
+        {day.charAt(0).toUpperCase() + day.slice(1)}
+      </option>
+    ));
+  };
+
+  const handleDayChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedDay = event.target.value;
+    setSelectedDay(selectedDay);
   };
 
   return (
@@ -112,9 +282,24 @@ export const ERoomBooking: React.FunctionComponent<{room_id : string}> = ({ room
           </select>
         </div>
 
-        <div className="ERoomBooking-container">{renderFormBookings()}
-          <button className="ERoomBoking-btn" type="submit">Confirm your reservation</button>
+        <div className="ERoomBooking-wrapper-day">
+          <label className="ERoomBooking-day" htmlFor="selectDay">
+            Select a day:
+          </label>
+          <select
+            className="ERoomBooking-select-day"
+            id="selectDay"
+            onChange={handleDayChange}
+          >
+            <option value="">Select a day</option>
+            {renderDayOptions()}
+          </select>
         </div>
+
+        {/* Render form bookings */}
+        {renderFormBookings()}
+
+        <button type="submit">Submit</button>
       </form>
     </FormProvider>
   );
