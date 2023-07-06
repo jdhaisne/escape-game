@@ -2,6 +2,7 @@ import { EButton } from "../button/EButton";
 import { EInput } from "../input/EInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
+
 import { API } from "../../services/ESAPI";
 import { logger } from "../../services/ESLogger";
 import { useNavigate } from "react-router-dom";
@@ -73,6 +74,7 @@ export const ERoomFormUpdate = ({
           error=""
           hasLabel
           value={updateData.roomName}
+          className="modal__input"
         ></EInput>
         <div>
           <label htmlFor="description">description</label>
@@ -80,6 +82,7 @@ export const ERoomFormUpdate = ({
             id="description"
             value={updateData.desc}
             onChange={(e) => handleFieldChange("desc", e.target.value)}
+            className="modal__input"
           />
         </div>
 
@@ -92,8 +95,9 @@ export const ERoomFormUpdate = ({
           error=""
           hasLabel
           value={updateData.age_limit}
+          className="modal__input"
         ></EInput>
-        <EButton>update</EButton>
+        <EButton classArray={["modal__button"]}>update</EButton>
       </form>
     </FormProvider>
   );

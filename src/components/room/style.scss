@@ -68,6 +68,8 @@ $secondary-colors: #5F4C78;
       padding: 1rem;
       font-size: 2rem;
       color: rgba(0, 0, 0, 0.678);
+      overflow: auto;
+      max-height: 80px;
     }
   
     
@@ -82,6 +84,7 @@ $secondary-colors: #5F4C78;
         font-weight: bold;
         display: inline;
         color: rgb(0, 146, 231);
+        cursor: pointer;
       }
     }
   
@@ -97,9 +100,13 @@ $secondary-colors: #5F4C78;
 
 
 .showroom {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 14px;
+  justify-content: flex-start;
+  margin: auto;
+  width: 90%;
 }
 
 
