@@ -10,6 +10,7 @@ import { validateField } from "../../services/ESFieldValidation";
 import { fieldValidations } from "../../utils/formValidation";
 import { EInput } from "../input/EInput";
 import { EButton } from "../button/EButton";
+import { ENotifType } from "../../enums/ENotification-enum";
 
 interface FormData {
   email: string;
@@ -45,9 +46,16 @@ export const ELoginForm = ({ className }: { className?: string }) => {
         if (res.status === 200) {
           const storedUserData = localStorage.getItem("userData");
           if (!storedUserData) {
-            appContext?.setCanStoreData(true);
-            appContext?.setUserData(res.data);
+            appContext && appContext.setCanStoreData(true);
+            appContext && appContext.setUserData(res.data);
           }
+          
+          appContext?.setNotif({
+            txt: "You have been connected",
+            type: ENotifType.SUCCESS,
+            bShow: true,
+          });
+
           navigate("/");
         } else {
           logger.error("Login failed: Invalid credentials");

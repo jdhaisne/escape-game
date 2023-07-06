@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { API } from "../../services/ESAPI";
 import { validateField } from "../../services/ESFieldValidation";
 import { EButton } from "../button/EButton";
@@ -9,6 +9,8 @@ import { logger } from "../../services/ESLogger";
 import { Navigate } from "react-router-dom";
 
 import './style.scss'
+import { AppContext, IAppContext } from "../../context/app-ctx";
+import { ENotifType } from "../../enums/ENotification-enum";
 
 export const ESubscribeForm = ({ className }: { className?: string }) => {
   const [registerData, setRegisterData] = useState<IUserPost>({
@@ -31,6 +33,9 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
   const [showPassword, setShowPassword] = useState(false);
   const methods = useForm();
   const [redirectToLogin, setRedirectToLogin] = useState(false);
+
+  const appContext = useContext<IAppContext | null>(AppContext);
+
 
   const handleFieldChange = (field: string, value: string) => {
     const errorMessage = validateField(value, fieldValidations[field]);
@@ -56,6 +61,13 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
       try {
         await API.Post("auth/register", payload);
         setRedirectToLogin(true);
+
+        appContext?.setNotif({
+          txt: "You have been registered, you can now login !",
+          type: ENotifType.SUCCESS,
+          bShow: true,
+        });
+
       } catch (e : any ) {
         logger.error(`Error registering user: ${e}`);
       }

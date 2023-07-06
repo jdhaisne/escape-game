@@ -10,34 +10,6 @@ import './style.scss'
 import { IERoom } from "../../interfaces/interface_App";
 import { getRoomByID } from "../../services/ESRooms";
 
-// Ajoute cette interface à ton code
-interface IERoomAvailability {
-  monday: {
-    morning: boolean;
-    afternoon: boolean;
-  };
-  tuesday: {
-    morning: boolean;
-    afternoon: boolean;
-  };
-  wednesday: {
-    morning: boolean;
-    afternoon: boolean;
-  };
-  thursday: {
-    morning: boolean;
-    afternoon: boolean;
-  };
-  friday: {
-    morning: boolean;
-    afternoon: boolean;
-  };
-  saturday: {
-    morning: boolean;
-    afternoon: boolean;
-  };
-}
-
 export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ room_id }) => {
   const methods = useForm();
   const navigate = useNavigate();
@@ -135,17 +107,14 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
         participant.birthday.trim() !== ""
     );
   
-    // Check if the form is valid:
     if (!isFormValid) {
       return logger.error("Fill all the inputs.");
     }
   
-    // Check if the user is connected:
     if (!SUser.isConnected() && !SUser.getId()) {
       return logger.error("You need to be connected to make a booking.");
     }
   
-    // Handle the booking using the first available day and time
     const payload = {
       user_id: SUser.getId(),
       room_id: room_id,
@@ -157,7 +126,6 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
 
     API.Post("bookings", payload)
     .then(() => {
-      // Update the availability in the room state
       setRoom((prevRoom) => {
         if (!prevRoom) {
           return room;
@@ -165,7 +133,6 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
 
         const updatedAvailability = { ...prevRoom.availability };
 
-        // Vérifier si un jour a été sélectionné
         if (selectedDay) {
           const dayAvailability = updatedAvailability[selectedDay as keyof typeof updatedAvailability];
           const selectedTime = dayAvailability.morning ? "morning" : "afternoon";
@@ -176,7 +143,6 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
           };
         }
 
-        // Faire une requête PUT pour mettre à jour la disponibilité de la salle sur le serveur
         API.Put(`rooms/${room_id}/update-availability`, {
           availability: updatedAvailability,
         })
@@ -296,7 +262,6 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
           </select>
         </div>
 
-        {/* Render form bookings */}
         {renderFormBookings()}
 
         <button type="submit">Submit</button>
