@@ -3,10 +3,9 @@ import React from "react";
 import "./style.scss";
 
 // export const EInput: React.FC<IEInputForm> = ({
-export const EInput = ({
+export const ETextarea = ({
   label,
   id,
-  type,
   placeholder,
   hasLabel,
   onChange,
@@ -15,23 +14,21 @@ export const EInput = ({
 }: {
   label?: string;
   id: string;
-  type: string;
   placeholder: string;
   hasLabel?: boolean;
   onChange: (e?: any) => void;
   error?: string;
-  value?: string | number;
+  value?: string;
 }) => {
   return (
     <div>
       {hasLabel && <label htmlFor={id}>{label}</label>}
-      <input
+      <textarea
         id={id}
-        type={type}
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-      />
+      ></textarea>
       <p className="error-message">{error}</p>
     </div>
   );
