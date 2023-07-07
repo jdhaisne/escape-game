@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getRoomByID } from "../services/ESRooms";
-import { ERoomTitle } from "../components/room/ERoomTitle";
-import { ERoomImage } from "../components/room/ERoomImage";
-import { ERoomBooking } from "../components/room/ERoomBooking";
 import { IERoom } from "../interfaces/interface_App";
+import { EDetailImage } from "../components/detail/EDetailImage";
+import { EDetailTitle } from "../components/detail/EDetailTitle";
+import { EDetailDescription } from "../components/detail/EDetailDescription";
+import { EAvailability } from "../components/detail/EAvailability/EAvailability";
 
-export const ERoomPage = () => {
+export const ERoomDetailPage = () => {
   const { id } = useParams();
   const [room, setRoom] = useState<IERoom>({
     _id: "",
@@ -86,8 +87,6 @@ export const ERoomPage = () => {
     }
   }, [id]);
 
-
-  // TODO : MAKE A LOADING COMPONENT AND STYLE IT
   if (!room._id && id !== '404') {
     return <h1>Loading...</h1>;
   }
@@ -97,15 +96,14 @@ export const ERoomPage = () => {
   }
 
   return (
-    <>
-      <div className="ERoomPage-container">
-        <div className="ERoomPage-wrapper">
-          <ERoomImage image={room.image} />
-          <ERoomTitle title={room.name} />
-        </div>
-       
-        {id && <ERoomBooking room_id={id} />}
+    <div className="ERoomDetailPage-container">
+      <div className="ERoomDetailPage-wrapper">
+        <EDetailImage image={room.image} />
+        <EDetailTitle title={room.name} />
+        <EDetailDescription description={room.description}/>
       </div>
-    </>
+
+      <EAvailability/>
+    </div>
   );
 };

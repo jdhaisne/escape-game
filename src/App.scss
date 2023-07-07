@@ -1,7 +1,5 @@
 @import url('./assets/styles/reset.scss');
-
-$primary-colors: #876BAB;
-$secondary-colors: #5F4C78;
+@import './assets/styles/variables.scss';
 
 
 
@@ -73,10 +71,56 @@ input {
 }
 
 
+
 .ERoomPage-container {
+
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 5rem;
+
+  .ERoomPage-wrapper
+  {
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin: 2rem;
+    width: 50rem;
+  }
+}
+
+
+
+.participants {
+  display:  flex;
+  flex-direction: column;
+
+}
+.participant {
+  border-bottom: 1px solid black;
+}
+.participant:last-of-type {
+  border: none;
+}
+
+.ERoomDetailPage-container
+{
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 5rem;
+  gap: 15rem;
+
+
+  .ERoomDetailPage-wrapper
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: auto;
+    margin-top: 5rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    width: 80rem;
+    border-radius: 1rem;
+  }
 }

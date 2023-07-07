@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { API } from "../../services/ESAPI";
 import { validateField } from "../../services/ESFieldValidation";
 import { EButton } from "../button/EButton";
@@ -9,7 +9,9 @@ import { logger } from "../../services/ESLogger";
 import { Navigate } from "react-router-dom";
 import { EntypoEye, EntypoEyeWithLine } from '../EEye';
 
-import './style.scss'
+import "./style.scss";
+import { AppContext, IAppContext } from "../../context/app-ctx";
+import { ENotifType } from "../../enums/ENotification-enum";
 
 export const ESubscribeForm = ({ className }: { className?: string }) => {
   const [registerData, setRegisterData] = useState<IUserPost>({
@@ -17,7 +19,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
     lastname: "",
     email: "",
     password: "",
-    birthday: ""
+    birthday: "",
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({
@@ -32,6 +34,8 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
   const [showPassword, setShowPassword] = useState(false);
   const methods = useForm();
   const [redirectToLogin, setRedirectToLogin] = useState(false);
+
+  const appContext = useContext<IAppContext | null>(AppContext);
 
   const handleFieldChange = (field: string, value: string) => {
     const errorMessage = validateField(value, fieldValidations[field]);
@@ -56,11 +60,19 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
       try {
         await API.Post("auth/register", payload);
         setRedirectToLogin(true);
+
+
+        appContext?.setNotif({
+          txt: "You have been registered, you can now login !",
+          type: ENotifType.SUCCESS,
+          bShow: true,
+        });
+
       } catch (e: any) {
         logger.error(`Error registering user: ${e}`);
       }
     } else {
-      logger.error("Il y a des erreurs dans le formulaire");
+      logger.error("There are errors in the form");
     }
   };
 
@@ -77,7 +89,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="First name"
           hasLabel={false}
-          name="firstname"
           onChange={(e) => handleFieldChange("firstname", e.target.value)}
           error={errors["firstname"]}
         />
@@ -87,7 +98,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Last name"
           hasLabel={false}
-          name="lastname"
           onChange={(e) => handleFieldChange("lastname", e.target.value)}
           error={errors["lastname"]}
         />
@@ -97,7 +107,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Email"
           hasLabel={false}
-          name="email"
           onChange={(e) => handleFieldChange("email", e.target.value)}
           error={errors["email"]}
         />
@@ -108,7 +117,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Date of Birth"
           hasLabel={false}
-          name="birthday"
           onChange={(e) => handleFieldChange("birthday", e.target.value)}
           error={errors["birthday"]}
         />
@@ -120,7 +128,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             hasLabel={false}
-            name="password"
             onChange={(e) => handleFieldChange("password", e.target.value)}
             error={errors["password"]}
           />
@@ -140,9 +147,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           </button>
         </div>
 
-        <EButton classArray={["login__button"]}>
-          Register
-        </EButton>
+        <EButton classArray={["login__button"]}>Register</EButton>
       </form>
     </FormProvider>
   );

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import './style.scss'
+import "./style.scss";
 import { useContext, useState } from "react";
 import { AppContext, IAppContext } from "../../context/app-ctx";
 import { FormProvider, useForm } from "react-hook-form";
@@ -10,7 +10,11 @@ import { validateField } from "../../services/ESFieldValidation";
 import { fieldValidations } from "../../utils/formValidation";
 import { EInput } from "../input/EInput";
 import { EButton } from "../button/EButton";
+
 import { EntypoEye, EntypoEyeWithLine } from '../EEye';
+
+import { ENotifType } from "../../enums/ENotification-enum";
+
 
 interface FormData {
   email: string;
@@ -20,7 +24,6 @@ export const ELoginForm = ({ className }: { className?: string }) => {
   const navigate = useNavigate();
   const appContext = useContext<IAppContext | null>(AppContext);
   const [showPassword, setShowPassword] = useState(false);
-
 
   const [loginData, setLoginData] = useState<FormData>({
     email: "",
@@ -34,7 +37,6 @@ export const ELoginForm = ({ className }: { className?: string }) => {
 
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-
   const methods = useForm<FormData>();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,14 +48,25 @@ export const ELoginForm = ({ className }: { className?: string }) => {
       try {
         const res = await API.Post("auth/login", { email, password });
         if (res.status === 200) {
-          const storedUserData = localStorage.getItem('userData');
+
+          const storedUserData = localStorage.getItem("userData");
           if (!storedUserData) {
-            appContext?.setCanStoreData(true);
-            appContext?.setUserData(res.data);
+            appContext && appContext.setCanStoreData(true);
+            appContext && appContext.setUserData(res.data);
+
           }
+          
+          appContext?.setNotif({
+            txt: "You have been connected",
+            type: ENotifType.SUCCESS,
+            bShow: true,
+          });
+
           navigate("/");
+
         }
         else {
+
           logger.error("Login failed: Invalid credentials");
           setShowErrorMessage(true);
         }
@@ -63,7 +76,7 @@ export const ELoginForm = ({ className }: { className?: string }) => {
     } else {
       logger.error("There are errors in the form");
     }
-  }
+  };
 
   const handleFieldChange = (field: string, value: string) => {
     const errorMessage = validateField(value, fieldValidations[field]);
@@ -87,7 +100,6 @@ export const ELoginForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Type your email..."
           hasLabel={false}
-          name="email"
           onChange={(e) => handleFieldChange("email", e.target.value)}
           error={errors["email"]}
         />
@@ -98,13 +110,14 @@ export const ELoginForm = ({ className }: { className?: string }) => {
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             hasLabel={false}
-            name="password"
+
             onChange={(e) => handleFieldChange("password", e.target.value)}
             error={errors["password"]}
           />
           <button
             type="button"
             className="password-toggle"
+
           >
             {showPassword ?
               (<EntypoEyeWithLine
@@ -114,6 +127,7 @@ export const ELoginForm = ({ className }: { className?: string }) => {
               (<EntypoEye
                 className="eye-icon"
                 onClick={() => setShowPassword((prev) => !prev)} />)}
+
           </button>
         </div>
 
@@ -121,9 +135,12 @@ export const ELoginForm = ({ className }: { className?: string }) => {
           <p className="error-message">Invalid credentials</p>
         )}
 
+
         <EButton classArray={["login__button"]}>
           Login
         </EButton>
+
+        <EButton classArray={["login__button"]}>Login</EButton>
 
       </form>
     </FormProvider>
