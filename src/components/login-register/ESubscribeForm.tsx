@@ -8,7 +8,7 @@ import { fieldValidations } from "../../utils/formValidation";
 import { logger } from "../../services/ESLogger";
 import { Navigate } from "react-router-dom";
 
-import './style.scss'
+import "./style.scss";
 import { AppContext, IAppContext } from "../../context/app-ctx";
 import { ENotifType } from "../../enums/ENotification-enum";
 
@@ -18,7 +18,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
     lastname: "",
     email: "",
     password: "",
-    birthday: ""
+    birthday: "",
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({
@@ -36,7 +36,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
 
   const appContext = useContext<IAppContext | null>(AppContext);
 
-
   const handleFieldChange = (field: string, value: string) => {
     const errorMessage = validateField(value, fieldValidations[field]);
     setErrors((prevErrors) => ({ ...prevErrors, [field]: errorMessage || "" }));
@@ -48,8 +47,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
 
     const formData = registerData;
 
-    if (Object.values(errors).every((error) => error === "")) 
-    {
+    if (Object.values(errors).every((error) => error === "")) {
       const payload = {
         firstname: formData.firstname,
         lastname: formData.lastname,
@@ -67,8 +65,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type: ENotifType.SUCCESS,
           bShow: true,
         });
-
-      } catch (e : any ) {
+      } catch (e: any) {
         logger.error(`Error registering user: ${e}`);
       }
     } else {
@@ -140,9 +137,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           </button>
         </div>
 
-        <EButton classArray={["login__button"]}>
-          Register
-        </EButton>
+        <EButton classArray={["login__button"]}>Register</EButton>
       </form>
     </FormProvider>
   );
