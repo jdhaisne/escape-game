@@ -139,9 +139,6 @@ export const ELoginForm = ({ className }: { className?: string }) => {
         <EButton classArray={["login__button"]}>
           Login
         </EButton>
-
-        <EButton classArray={["login__button"]}>Login</EButton>
-
       </form>
     </FormProvider>
   );
