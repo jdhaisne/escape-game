@@ -7,6 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { fieldValidations } from "../../utils/formValidation";
 import { logger } from "../../services/ESLogger";
 import { Navigate } from "react-router-dom";
+import { EntypoEye, EntypoEyeWithLine } from '../EEye';
 
 import "./style.scss";
 import { AppContext, IAppContext } from "../../context/app-ctx";
@@ -60,11 +61,13 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
         await API.Post("auth/register", payload);
         setRedirectToLogin(true);
 
+
         appContext?.setNotif({
           txt: "You have been registered, you can now login !",
           type: ENotifType.SUCCESS,
           bShow: true,
         });
+
       } catch (e: any) {
         logger.error(`Error registering user: ${e}`);
       }
@@ -131,9 +134,16 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           <button
             type="button"
             className="password-toggle"
-            onClick={() => setShowPassword((prev) => !prev)}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ?
+              (<EntypoEyeWithLine
+                className='eye-icon'
+                onClick={() => setShowPassword((prev) => !prev)} />)
+              :
+              (<EntypoEye
+                className="eye-icon"
+                onClick={() => setShowPassword((prev) => !prev)} />)}
+
           </button>
         </div>
 

@@ -6,23 +6,27 @@ $secondary-colors: #5F4C78;
 .footer-social-media {
   &__wrapper {
     display: flex;
-  flex-wrap: wrap;
-  margin: 0px 5px;
+    flex-wrap: wrap;
+    margin: 0px 5px;
   }
+
   &__logo {
     background-size: contain;
-  height: 35px;
-  width: 35px;
-  margin: 0px 5px;
-  &--twitter {
-background-image: url(./img/twitter.png);
-  }
-  &--facebook {
-    background-image: url(./img/facebook.png);
-  }
-  &--instagram {
-        background-image: url(./img/instagram.png);
-  }
+    height: 35px;
+    width: 35px;
+    margin: 0px 5px;
+
+    &--twitter {
+      background-image: url(../public/img/twitter.png);
+    }
+
+    &--facebook {
+      background-image: url(../public/img/facebook.png);
+    }
+
+    &--instagram {
+      background-image: url(../public/img/instagram.png);
+    }
   }
 }
 
@@ -36,14 +40,15 @@ background-image: url(./img/twitter.png);
   height: 100px;
   width: 100%;
   align-items: center;
-&__section {
-    color: #FFF;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  padding: 10px 0px;
-  font-size: 12px;
-&>p {
-  margin: 5px 0px;
-}
-}
-}
 
+  &__section {
+    color: #FFF;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 10px 0px;
+    font-size: 12px;
+
+    &>p {
+      margin: 5px 0px;
+    }
+  }
+}

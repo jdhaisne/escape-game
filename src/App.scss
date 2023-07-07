@@ -42,28 +42,44 @@ input {
   gap: 15px;
   justify-content: flex-start;
   padding: 20px;
+
   &__title {
-    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 3rem;
   }
+
   & table {
     font-size: 1.5rem;
   }
+
   & th {
-    border: 1px solid black;
+    border-bottom: 1px solid $secondary-colors;
+    padding: 5px;
   }
+
   & thead th {
     background-color: $secondary-colors;
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
   }
+
+  & tr:nth-child(even) {
+    background-color: #d8cce9;
+  }
+
 }
 
-.ERoomPage-container
-{
+
+
+.ERoomPage-container {
+
   display: flex;
   justify-content: center;
-  align-items: flex-start;  
+
+  align-items: center;
+
   gap: 5rem;
 
   .ERoomPage-wrapper

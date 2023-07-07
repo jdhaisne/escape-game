@@ -10,7 +10,11 @@ import { validateField } from "../../services/ESFieldValidation";
 import { fieldValidations } from "../../utils/formValidation";
 import { EInput } from "../input/EInput";
 import { EButton } from "../button/EButton";
+
+import { EntypoEye, EntypoEyeWithLine } from '../EEye';
+
 import { ENotifType } from "../../enums/ENotification-enum";
+
 
 interface FormData {
   email: string;
@@ -44,10 +48,12 @@ export const ELoginForm = ({ className }: { className?: string }) => {
       try {
         const res = await API.Post("auth/login", { email, password });
         if (res.status === 200) {
+
           const storedUserData = localStorage.getItem("userData");
           if (!storedUserData) {
             appContext && appContext.setCanStoreData(true);
             appContext && appContext.setUserData(res.data);
+
           }
           
           appContext?.setNotif({
@@ -57,7 +63,10 @@ export const ELoginForm = ({ className }: { className?: string }) => {
           });
 
           navigate("/");
-        } else {
+
+        }
+        else {
+
           logger.error("Login failed: Invalid credentials");
           setShowErrorMessage(true);
         }
@@ -101,15 +110,24 @@ export const ELoginForm = ({ className }: { className?: string }) => {
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             hasLabel={false}
+
             onChange={(e) => handleFieldChange("password", e.target.value)}
             error={errors["password"]}
           />
           <button
             type="button"
             className="password-toggle"
-            onClick={() => setShowPassword((prev) => !prev)}
+
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ?
+              (<EntypoEyeWithLine
+                className='eye-icon'
+                onClick={() => setShowPassword((prev) => !prev)} />)
+              :
+              (<EntypoEye
+                className="eye-icon"
+                onClick={() => setShowPassword((prev) => !prev)} />)}
+
           </button>
         </div>
 
@@ -117,7 +135,13 @@ export const ELoginForm = ({ className }: { className?: string }) => {
           <p className="error-message">Invalid credentials</p>
         )}
 
+
+        <EButton classArray={["login__button"]}>
+          Login
+        </EButton>
+
         <EButton classArray={["login__button"]}>Login</EButton>
+
       </form>
     </FormProvider>
   );
