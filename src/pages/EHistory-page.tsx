@@ -9,11 +9,12 @@ export const EHistory = () => {
   const createbookingsList = () => {
     if (!bookings) return <></>;
     return bookings.map((booking) => {
-      console.log(booking);
+      // console.log(booking);
+      const date = new Date(booking.date_and_time);
       return (
         <tr key={booking.room_id}>
           <th>{booking.rooms[0].name}</th>
-          <th>{booking.date_and_time}</th>
+          <th>{`${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`}</th>
 
           <th className="participants">
             {booking.list_of_participants.map((user) => {
