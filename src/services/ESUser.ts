@@ -1,4 +1,5 @@
 import { IContextData } from "../interfaces/IContextData";
+import { logger } from "./ESLogger";
 
 export const SUser = {
 
@@ -30,5 +31,21 @@ export const SUser = {
     logout () : void 
     {
         localStorage.removeItem("userData");
+    },
+
+    isMajor() : boolean 
+    {
+
+        const dateNaissance = this.getData()?.birthday.toString()!;
+        const dateNaissanceObj = new Date(
+            parseInt(dateNaissance.split("/")[2]),   // année
+            parseInt(dateNaissance.split("/")[1]) - 1,   // mois (les mois commencent à partir de 0)
+            parseInt(dateNaissance.split("/")[0])   // jour
+        );
+        
+        const dateActuelle = new Date();
+        const differenceAnnees = dateActuelle.getFullYear() - dateNaissanceObj.getFullYear();
+
+        return differenceAnnees >= 18 
     }
 }

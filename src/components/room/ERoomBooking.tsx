@@ -134,6 +134,17 @@ export const ERoomBooking: React.FunctionComponent<{ room_id: string }> = ({ roo
       return logger.error("You need to be connected to make a booking.");
     }
 
+    if(!SUser.isMajor())
+    {
+      appContext?.setNotif({
+        txt: "You need to be an adult to be able to book.",
+        type: ENotifType.ERROR,
+        bShow: true,
+      });
+
+      return logger.error("You need to be connected to make a booking.");
+    }
+
     const payload = {
       user_id: SUser.getId(),
       room_id: room_id,
