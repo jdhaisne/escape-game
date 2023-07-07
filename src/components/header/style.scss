@@ -1,0 +1,63 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 70px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #876BAB;
+  
+    &__wrapper 
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    &__logo {
+      width: 15em;
+      height: 9rem;
+      background-image: url(../img/escapelogo.png);
+      background-size: cover;
+    }
+  
+    &__modal {
+      position: absolute;
+      right: 5px;
+      top: 35px;
+      padding: 5px;
+      background: gray;
+      width: 300px;
+    }
+  }
+  
+  .header__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: #FF5E02;
+    padding: 0.8rem 3rem;
+    border: 1px solid #FF5E02;
+    border-radius: 20px;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .header__history
+  {
+    background-color: #1785df;
+    border: 1px solid #1785df;
+  }
+  
+  .header__button:hover {
+    color: #FF5E02;
+    background-color: #FFF;
+    border: 1px solid #FFF;
+  }
+  

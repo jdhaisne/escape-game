@@ -1,0 +1,21 @@
+.EFormBooking-card
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: #876BAB;
+    margin: 2rem auto;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+    &__title 
+    {
+        font-size: 2.3rem;
+        font-weight: bold;
+        color: rgb(37, 35, 35);
+    }
+}

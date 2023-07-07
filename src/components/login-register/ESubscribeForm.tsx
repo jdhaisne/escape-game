@@ -1,12 +1,16 @@
-import { useState } from "react";
-import { API } from "../services/ESAPI";
-import { validateField } from "../services/ESFieldValidation";
-import { EButton } from "./EButton";
-import { EInput } from "./EInput";
+import { useContext, useState } from "react";
+import { API } from "../../services/ESAPI";
+import { validateField } from "../../services/ESFieldValidation";
+import { EButton } from "../button/EButton";
+import { EInput } from "../input/EInput";
 import { FormProvider, useForm } from "react-hook-form";
-import { fieldValidations } from "../utils/formValidation";
-import { logger } from "../services/ESLogger";
-import { useNavigate } from "react-router-dom";
+import { fieldValidations } from "../../utils/formValidation";
+import { logger } from "../../services/ESLogger";
+import { Navigate } from "react-router-dom";
+
+import "./style.scss";
+import { AppContext, IAppContext } from "../../context/app-ctx";
+import { ENotifType } from "../../enums/ENotification-enum";
 
 export const ESubscribeForm = ({ className }: { className?: string }) => {
   const [registerData, setRegisterData] = useState<IUserPost>({
@@ -16,6 +20,7 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
     password: "",
     birthday: "",
   });
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({
     firstname: "",
     lastname: "",
@@ -24,10 +29,12 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
     confirm: "",
     birthday: "",
   });
-  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const methods = useForm();
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
+
+  const appContext = useContext<IAppContext | null>(AppContext);
 
   const handleFieldChange = (field: string, value: string) => {
     const errorMessage = validateField(value, fieldValidations[field]);
@@ -49,14 +56,26 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
         birthday: formData.birthday,
       };
 
-      await API.Post("auth/register", payload);
-      navigate("/login");
-    } else {
-      logger.error("Il y a des erreurs dans le formulaire");
-    }
+      try {
+        await API.Post("auth/register", payload);
+        setRedirectToLogin(true);
 
-    logger.debug(formData);
+        appContext?.setNotif({
+          txt: "You have been registered, you can now login !",
+          type: ENotifType.SUCCESS,
+          bShow: true,
+        });
+      } catch (e: any) {
+        logger.error(`Error registering user: ${e}`);
+      }
+    } else {
+      logger.error("There are errors in the form");
+    }
   };
+
+  if (redirectToLogin) {
+    return <Navigate replace to="/" />;
+  }
 
   return (
     <FormProvider {...methods}>
@@ -67,7 +86,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="First name"
           hasLabel={false}
-          name="firstname"
           onChange={(e) => handleFieldChange("firstname", e.target.value)}
           error={errors["firstname"]}
         />
@@ -77,7 +95,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Last name"
           hasLabel={false}
-          name="lastname"
           onChange={(e) => handleFieldChange("lastname", e.target.value)}
           error={errors["lastname"]}
         />
@@ -87,20 +104,18 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
           type="text"
           placeholder="Email"
           hasLabel={false}
-          name="email"
           onChange={(e) => handleFieldChange("email", e.target.value)}
           error={errors["email"]}
         />
 
         <EInput
           label="Date of Birth"
-          id="date"
+          id="birthday"
           type="text"
           placeholder="Date of Birth"
           hasLabel={false}
-          name="date"
-          onChange={(e) => handleFieldChange("date", e.target.value)}
-          error={errors["date"]}
+          onChange={(e) => handleFieldChange("birthday", e.target.value)}
+          error={errors["birthday"]}
         />
 
         <div className="form-register-password">
@@ -110,7 +125,6 @@ export const ESubscribeForm = ({ className }: { className?: string }) => {
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             hasLabel={false}
-            name="password"
             onChange={(e) => handleFieldChange("password", e.target.value)}
             error={errors["password"]}
           />

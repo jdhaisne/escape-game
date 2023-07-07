@@ -1,3 +1,6 @@
+import './style.scss'
+
+
 export const EPegi = ({ age }: { age: number }) => {
   let imgPath = "";
   if (age <= 3)

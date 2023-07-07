@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { EInput } from "./EInput";
-import { validateField } from "../services/ESFieldValidation";
-import { fieldValidations } from "../utils/formValidation";
+import { EInput } from "../input/EInput";
+import { validateField } from "../../services/ESFieldValidation";
+import { fieldValidations } from "../../utils/formValidation";
+
+import './style.scss'
 
 export const EFormBooking: React.FC<IEFormBooking> = ({
   index,
@@ -25,15 +27,14 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
   };
 
   return (
-    <div>
-      <h4>Participant {index + 1}</h4>
+    <div className="EFormBooking-card">
+      <h4 className="EFormBooking-card__title">Participant {index + 1}</h4>
       <EInput
         label="First Name"
         id={`firstname`}
         type="text"
         placeholder="First Name"
         hasLabel={false}
-        name={`firstname`}
         onChange={(e) => handleFieldChange("firstname", e.target.value)}
         error={errors["firstname"]}
       />
@@ -43,7 +44,6 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
         type="text"
         placeholder="Last Name"
         hasLabel={false}
-        name={`lastname`}
         onChange={(e) => handleFieldChange("lastname", e.target.value)}
         error={errors["lastname"]}
       />
@@ -53,7 +53,6 @@ export const EFormBooking: React.FC<IEFormBooking> = ({
         type="text"
         placeholder="Date of Birth"
         hasLabel={false}
-        name={`birthday`}
         onChange={(e) => handleFieldChange("birthday", e.target.value)}
         error={errors["birthday"]}
       />

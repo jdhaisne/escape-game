@@ -1,11 +1,11 @@
-import style from './style.module.scss'
+import './style.scss'
 
 
-export const ERoomImage = () => 
+export const ERoomImage : React.FunctionComponent<{image : string}> = ({image}) => 
 {
     return (
-        <div className={`container ${style.img_wrapper}`}>
-            <img width={100} className={style.img} src='https://images.rtl.fr/~c/795v350/rtl/www/1342307-escape-game.jpg' alt="preview room image" />
+        <div className={`img_wrapper`}>
+            <img width={100} className={'img'} src={`${image}`} alt="preview room image" />
         </div>
     )
 }

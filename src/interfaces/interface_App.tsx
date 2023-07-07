@@ -11,6 +11,33 @@ export interface IERoom {
   description: string;
   age_limit: string;
   slots: number;
+  availability: {
+    monday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    tuesday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    wednesday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    thursday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    friday: {
+      morning: boolean,
+      afternoon: boolean
+    },
+    saturday :
+    {
+      morning: boolean,
+      afternoon: boolean
+    }
+  };
   __v?: number;
 }
 
@@ -32,6 +59,12 @@ export interface IEBooking {
   room_id: string;
   date_and_time: string;
   number_of_players: number;
+  list_of_participants: {
+    _id: string;
+    birthday: string;
+    firstname: string;
+    lastname: string;
+  }[];
   __v?: number;
   users: IEUser[];
   rooms: ERooms;

@@ -1,3 +1,6 @@
+
+import './style.scss'
+
 export const EFooter = () => {
   return (
     <div className="footer">
