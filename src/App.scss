@@ -19,6 +19,7 @@ body {
 }
 
 
+
 input {
   width: 30rem;
   height: 2rem;
@@ -96,15 +97,5 @@ input {
   gap: 15rem;
 
 
-  .ERoomDetailPage-wrapper
-  {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: auto;
-    margin-top: 5rem;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    width: 80rem;
-    border-radius: 1rem;
-  }
+
 }
