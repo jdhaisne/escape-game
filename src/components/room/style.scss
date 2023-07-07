@@ -1,0 +1,201 @@
+$primary-colors: #876BAB;
+$secondary-colors: #5F4C78;
+
+.room-container 
+{
+    width: 50rem;
+    height: auto;
+    padding: 2rem;
+    background-color: gray;
+    border-radius: 1.5rem;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+}
+
+.img_wrapper
+{
+    .img 
+    {
+      width: 100%;
+      height: auto;
+    }
+}
+
+
+
+.room {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    width: 50rem;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin: 0 2rem;
+
+    &__img 
+    {
+      border-radius: 1rem;
+      min-width: 100%;
+      height: 20rem;
+      aspect-ratio: 16/9;
+    }
+  
+    &__title {
+      padding: 1rem;
+      font-size: 3rem;
+      color: rgba(41, 38, 38, 0.918);
+      font-weight: bold;
+    }
+  
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 2rem;
+      width: 100%;
+    }
+  
+    &__desc {
+      padding: 1rem;
+      font-size: 2rem;
+      color: rgba(0, 0, 0, 0.678);
+      overflow: auto;
+      max-height: 80px;
+    }
+  
+    
+    &__link {
+      padding: 1rem;
+      text-decoration: none;
+      color: $primary-colors;
+  
+      &__item 
+      {
+        font-size: 2.2rem;
+        font-weight: bold;
+        display: inline;
+        color: rgb(0, 146, 231);
+        cursor: pointer;
+      }
+    }
+  
+    // SOON DETAIL BUTTON :
+    &__link:nth-child(2) .room__link__item 
+    {
+      color: gray;
+    }
+  
+   
+}
+  
+
+
+.showroom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 14px;
+  justify-content: flex-start;
+  margin: auto;
+  width: 90%;
+}
+
+
+
+
+
+.ERoomBooking-form
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  width: 50rem;
+  height: 45rem;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2rem;
+  overflow: auto;
+}
+
+.ERoomBooking-container
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50rem;
+  height: 50rem;
+  overflow: auto;
+  margin-bottom: 10rem;
+}
+
+.ERoom-title
+{
+  text-align: center;
+  font-weight: bold;
+  font-size: 3rem;
+  color: rgba(41, 38, 38, 0.918);
+  margin: 2rem;
+}
+
+.ERoomBoking-btn
+{
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 2rem;
+  background-color: #fd4800;
+  border: 1px solid #23252763;
+  color: #FFF;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  &:hover 
+  {
+    cursor: pointer;
+    background-color: #d44006;
+  }
+}
+
+
+.ERoomingBooking-wrapper-participant
+{
+  margin: 2rem;
+}
+.ERoomBooking-participants
+{
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 2rem 0;
+  color: rgba(63, 62, 62, 0.918);
+}
+
+
+.ERoomBooking-slot
+{
+  padding: 0rem 0.5rem;
+  border-radius: 0.5rem;
+  margin: 0 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.ERoomBooking-select-day
+{
+  font-size: 2rem;
+  color: rgba(44, 43, 43, 0.918);
+  font-weight: bold;
+  padding: 2rem;
+}
+
+.full
+{
+  padding: 1rem;
+  color: #0e0c0ccb;
+  font-weight: bold;
+}

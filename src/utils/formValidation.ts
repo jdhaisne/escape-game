@@ -1,109 +1,58 @@
-import {useForm} from 'react-hook-form'
+import { IFieldValidation } from "../interfaces/IFieldValidation";
 
-// const {watch} = useForm()
-
-export const mail_validation= {
-    name: 'mail',
-    validation: {
-        required: {
-            value: true,
-            message: 'required'
-        },
-        pattern: {
-            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-            message: 'need a valid mail'
-        }
-    }
-}
-
-export const password_validation_login = {
-    name: 'passwordLogin',
-    validation: {
-        required: {
-            value: true,
-        message: 'required'
-        },
-    }
-}
-
-export const password_validation = {
-    name: 'password',
-    validation: {
-        required: {
-            value: true,
-        message: 'required'
-        },
-        minLength: {
-            value: 6,
-            message: 'Must be at least 6 characters long.'
-        },
-        maxLength: {
-            value: 20,
-            message: "Must be at max 20 characters long."
-        }
-    }
-}
-
-// export const confirm_password_validation = {
-//     name: 'confirmPassword',
-//     validation: {
-//         required: {
-//             value: true,
-//         message: 'required'
-//         },
-//         minLength: {
-//             value: 6,
-//             message: 'Must be at least 6 characters long.'
-//         },
-//         maxLength: {
-//             value: 20,
-//             message: "Must be at max 20 characters long."
-//         },
-//         validate: {
-//             value: (val: string) => {
-//                 if(watch('password') != val)
-//                     return false
-//                 return true
-//             },
-//             message: 'password does not macthes'
-//         }
-//     }
-// }
-
-
-
-export const name_validation = {
-    // name: 'firstName',
-    validation: {
-        required: {
-            value: true,
-            message: 'required'
-        },
-        minLength: {
-            value: 2,
-            message: 'Must be at least 2 characters long.'
-        },
-        maxLength: {
-            value: 50,
-            message: "Must be at max 50 characters long."
-        }
-    }
-}
-
-// export const last_name_validation = {
-//     name: 'lastName',
-//     validation: {
-//         required: {
-//             value: true,
-//             message: 'required'
-//         },
-//         // minLength: {
-//         //     value: 2,
-//         //     message: 'Must be at least 2 characters long.'
-//         // },
-//         // maxLength: {
-//         //     value: 50,
-//         //     message: "Must be at max 50 characters long."
-//         // }
-//     }
-// }
+export const fieldValidations: { [key: string]: IFieldValidation } = {
+    email: {
+      required: { value: true, message: "Field is required" },
+      pattern: {
+        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        message: "Invalid email format",
+      },
+    },
+    password: {
+      required: { value: true, message: "Field is required" },
+      minLength: { value: 6, message: "Must contain at least 6 characters" },
+      maxLength: { value: 20, message: "Must contain at most 20 characters" },
+      pattern: {
+        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/,
+        message: "Password should be 6-20 characters long with at least one uppercase letter and special characters.",
+      },
+    },
+    date: {
+      required: { value: true, message: "Field is required" },
+      pattern: {
+        value: /^\d{2}\/\d{2}\/\d{4}$/,
+        message: "Invalid date format. Please use DD/MM/YYYY",
+      },
+    },
+    firstname: {
+      required: { value: true, message: "Field is required" },
+      minLength: { value: 2, message: "Must contain at least 2 characters" },
+      maxLength: {
+        value: 50,
+        message: "Must contain at most 50 characters",
+      },
+      pattern: {
+        value: /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/,
+        message: "Invalid firstname format. Please use letters only.",
+      },
+    },
+    lastname: {
+      required: { value: true, message: "Field is required" },
+      minLength: { value: 2, message: "Must contain at least 2 characters" },
+      maxLength: {
+        value: 50,
+        message: "Must contain at most 50 characters",
+      },
+      pattern: {
+        value: /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/,
+        message: "Invalid lastname format. Please use letters only.",
+      },
+    },
+    birthday: {
+      required: { value: true, message: "Field is required" },
+      pattern: {
+        value: /^\d{2}\/\d{2}\/\d{4}$/,
+        message: "Invalid date format. Please use DD/MM/YYYY",
+      },
+    },
+};
